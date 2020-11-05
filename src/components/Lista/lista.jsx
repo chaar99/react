@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Producto from './../Producto/producto';
 
 class Lista extends Component {
     constructor(props) {
@@ -6,12 +7,13 @@ class Lista extends Component {
     }
 
     render() {
-        const imag = this.props.producto.map((productoos) =><div className="Productos">
-        <p>Imagen: {productoos.ruta}, Nombre: {productoos.nombre}, descripcion: {productoos.descripcion}</p></div>)
+        const { productos } = this.props;
         return (
-            
-            <div>
-                elementos hechos con el componente lista: {imag}
+            <div className="productos">
+                <h1>Soy el componente Lista</h1>
+                {productos.map(producto => (
+                    <Producto elemento={producto} />
+                ))}
             </div>
            
         );

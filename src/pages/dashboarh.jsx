@@ -36,7 +36,6 @@ class Dashboard extends Component {
         this.setState({
             edad: ev.target.value
         });
-        debugger;
     } 
 
     render() {
@@ -49,7 +48,7 @@ class Dashboard extends Component {
                 <button onClick={() => this.sumarContador()}>Sumar</button>
                 <input type="number" onChange={(ev) => this.actualizarEdad(ev)} />
                 <dir>{imag}</dir>
-                <Lista producto={productos} />
+                <Lista productos={productos} />
             </div>
         );
     }
