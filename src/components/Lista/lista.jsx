@@ -6,10 +6,12 @@ class Lista extends Component {
     }
 
     render() {
+        const imag = this.props.producto.map((productoos) =><div className="Productos">
+        <p>Imagen: {productoos.ruta}, Nombre: {productoos.nombre}, descripcion: {productoos.descripcion}</p></div>)
         return (
             
             <div>
-                elementos hechos con el componente lista: {this.props.producto}
+                elementos hechos con el componente lista: {imag}
             </div>
            
         );

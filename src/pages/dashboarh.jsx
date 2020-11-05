@@ -49,7 +49,7 @@ class Dashboard extends Component {
                 <button onClick={() => this.sumarContador()}>Sumar</button>
                 <input type="number" onChange={(ev) => this.actualizarEdad(ev)} />
                 <dir>{imag}</dir>
-                <Lista producto={imag} />
+                <Lista producto={productos} />
             </div>
         );
     }
