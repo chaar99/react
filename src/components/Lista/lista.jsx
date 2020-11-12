@@ -9,7 +9,7 @@ class Lista extends Component {
     render() {
         const { productos } = this.props;
         return (
-            <div className="productos">
+            <div>
                 <h1>Soy el componente Lista</h1>
                 {productos.map(producto => (
                     <Producto elemento={producto} />

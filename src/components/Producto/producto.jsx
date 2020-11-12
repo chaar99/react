@@ -9,7 +9,7 @@ class Producto extends Component {
         const { elemento } = this.props;
         return (
             <div className= {`producto-${elemento.nombre}`}>
-                <p>Nombre: {elemento.nombre}</p>
+                <p className="text-success">Nombre: {elemento.nombre}</p>
                 <p>Descripcion: {elemento.descripcion}</p>
             </div>
            
