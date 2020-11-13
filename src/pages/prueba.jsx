@@ -74,24 +74,29 @@ class Prueba extends Component {
             <div className="c-footer">
                 {loading && <p>Estoy cargando.....</p>}
                 {!loading && 
-                    <div className="border border-info rounded w-25 p-3 mx-auto">
-                        <h3 className="text-center">Registrate</h3>
-                        <div className="d-flex flex-column">
-                        {/* <p>El nombre es : {nombre}</p> */}
-                        <input className="m-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />
-                        <input className="m-2 form-control" type="text" placeholder="Name" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
-                        <input className="m-2 form-control" type="text" placeholder="Surname" onChange={(ev) => this.onChangeInput(ev)} id="apell" />
-                        <input className="m-2 form-control" type="password" placeholder="Password" onChange={(ev) => this.onChangeInput(ev)} id="password" />
-                        <input className="m-2 form-control" type="text" placeholder="DNI" onChange={(ev) => this.onChangeInput(ev)} id="dni" />
-                        <div className="d-flex flex-column">
-                            <button className="btn btn-primary" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
-                            <Link to="/loggin/">Users</Link>
+                    <div>
+                        <div className="border border-info rounded w-25 p-3 mx-auto">
+                            <h3 className="text-center">Registrate</h3>
+                            <div className="d-flex flex-column">
+                                {/* <p>El nombre es : {nombre}</p> */}
+                                <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />
+                                <input className="mr-2 mt-2 form-control" type="text" placeholder="Name" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
+                                <input className="mr-2 mt-2 form-control" type="text" placeholder="Surname" onChange={(ev) => this.onChangeInput(ev)} id="apell" />
+                                <input className="mr-2 mt-2 form-control" type="password" placeholder="Password" onChange={(ev) => this.onChangeInput(ev)} id="password" />
+                                <input className="mr-2 mt-2 form-control" type="text" placeholder="DNI" onChange={(ev) => this.onChangeInput(ev)} id="dni" />
+                                <div>
+                                    <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
+                                </div>
+                            </div>
+                            {/* <img src="./img/DNI1.jpg" width={150} /> */}
+                        </div>
+                        <div className="border border-info rounded w-25 p-3 mx-auto text-center mt-3">
+                            <p>¿Ya tienes una cuenta?
+                                <Link className="ml-2" to="/login">Inicia sesión</Link>
+                            </p>    
                         </div>
                     </div>
-                        
-                        {/* <img src="./img/DNI1.jpg" width={150} /> */}
-                 </div>
-                 }
+                }
             </div>
         );
     }

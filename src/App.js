@@ -3,6 +3,7 @@ import Menu from './components/menu';
 import Footer from './components/footer';
 import Dashboard from './pages/dashboarh';
 import Prueba from './pages/prueba';
+import Login from './pages/login';
 
 import {
   BrowserRouter as Router,
@@ -21,6 +22,7 @@ class App extends Component {
             <div>
               <Route exact path="/" component={Dashboard} />
               <Route exact path="/prueba" component={Prueba} />
+              <Route exact path="/login" component={Login} />
             </div>
           </Router>
       </div>
