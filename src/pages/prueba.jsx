@@ -69,34 +69,38 @@ class Prueba extends Component {
     }
 
     render() {
-        const {nombre, loading} = this.state;
+        const {loading} = this.state;
         return (
-            <div className="c-footer">
-                {loading && <p>Estoy cargando.....</p>}
-                {!loading && 
-                    <div>
-                        <div className="border border-info rounded w-25 p-3 mx-auto">
-                            <h3 className="text-center">Registrate</h3>
-                            <div className="d-flex flex-column">
-                                {/* <p>El nombre es : {nombre}</p> */}
-                                <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />
-                                <input className="mr-2 mt-2 form-control" type="text" placeholder="Name" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
-                                <input className="mr-2 mt-2 form-control" type="text" placeholder="Surname" onChange={(ev) => this.onChangeInput(ev)} id="apell" />
-                                <input className="mr-2 mt-2 form-control" type="password" placeholder="Password" onChange={(ev) => this.onChangeInput(ev)} id="password" />
-                                <input className="mr-2 mt-2 form-control" type="text" placeholder="DNI" onChange={(ev) => this.onChangeInput(ev)} id="dni" />
-                                <div>
-                                    <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
+            <div className="row">
+                <div className="col-12">
+                    {loading && <p>Estoy cargando.....</p>}
+                    {!loading && 
+                        <div className="d-flex flex-column">
+                            <div className="row">
+                                <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
+                                    <h3 className="text-center">Registrate</h3>
+                                    <div className="d-flex flex-column">
+                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />
+                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Name" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
+                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Surname" onChange={(ev) => this.onChangeInput(ev)} id="apell" />
+                                        <input className="mr-2 mt-2 form-control" type="password" placeholder="Password" onChange={(ev) => this.onChangeInput(ev)} id="password" />
+                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="DNI" onChange={(ev) => this.onChangeInput(ev)} id="dni" />
+                                        {/* <input type="file" name="archivosubido"></input> */}
+                                        <div>
+                                            <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            {/* <img src="./img/DNI1.jpg" width={150} /> */}
+                            
+                            <div className="text-center mt-3">
+                                <p>¿Ya tienes una cuenta?
+                                    <Link className="ml-2" to="/login">Inicia sesión</Link>
+                                </p>    
+                            </div>
                         </div>
-                        <div className="border border-info rounded w-25 p-3 mx-auto text-center mt-3">
-                            <p>¿Ya tienes una cuenta?
-                                <Link className="ml-2" to="/login">Inicia sesión</Link>
-                            </p>    
-                        </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         );
     }

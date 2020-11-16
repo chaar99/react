@@ -40,14 +40,14 @@ class Dashboard extends Component {
 
     render() {
         const {productos, contador, edad} = this.state;
-        const imag = productos.map((productoos) =>
-        <p>Imagen: {productoos.ruta}, Nombre: {productoos.nombre}, descripcion: {productoos.descripcion}</p>)
+        // const imag = productos.map((productoos) =>
+        // <p>Imagen: {productoos.ruta}, Nombre: {productoos.nombre}, descripcion: {productoos.descripcion}</p>)
         return (
             <div>
-                <p>Tengo {edad} años</p>
+                {/* <p>Tengo {edad} años</p>
                 <button onClick={() => this.sumarContador()}>Sumar</button>
-                <input type="number" onChange={(ev) => this.actualizarEdad(ev)} />
-                <dir>{imag}</dir>
+                <input type="number" onChange={(ev) => this.actualizarEdad(ev)} /> 
+                <dir>{imag}</dir> */}
                 <Lista productos={productos} />
             </div>
         );
