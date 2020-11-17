@@ -37,11 +37,15 @@ class Login extends Component {
                 body: JSON.stringify(objeto), // data can be `string` or {object}!
                 
             }
-        ).then(
-            this.setState({
-                loading: false
-            })
-        );
+        ).then(function(data) { 
+            debugger;
+            document.body.innerHTML = data.result;
+        });
+        // .then(
+        //     this.setState({
+        //         loading: false
+        //     })
+        // );
     }
 
     render() {
