@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 
 class Menu extends Component {
     constructor(props) {
@@ -12,14 +12,27 @@ class Menu extends Component {
     
     render() {
         return (
-            <div className="menu">
-              es el menu
-               {/* <Link to="/">Productos</Link>
-               <Link to="/prueba">Registrate</Link> */}
-            </div>
+            <Navbar  bg="dark" variant="dark"  className="top-menu">
+                <BrandNav />
+                <MenuNav />
+            </Navbar>
         );
     }
 };
 
+function BrandNav() {
+    return (
+        <Navbar.Brand className="d-flex align-items-center justify-content-center">
+            logo
+        </Navbar.Brand>
+    );
+}
 
+function MenuNav() {
+    return(
+        <Nav className="mr-auto">
+            <Nav.Link href="login">Inicia sesion</Nav.Link>
+        </Nav>
+    )
+}
 export default Menu;

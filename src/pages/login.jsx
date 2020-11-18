@@ -7,13 +7,13 @@ class Login extends Component {
         this.state = {
             password: null,
             correo: null,
+            nombre : null
         };
     }
 
     onChangeInput(ev) {
         ev.stopPropagation();
         ev.preventDefault();
-        debugger;
         this.setState({
             [ev.target.id]:ev.target.value
         });
@@ -30,26 +30,22 @@ class Login extends Component {
             password : password,
             correo : correo
         }
-        alert(typeof(objeto));
         fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php",
             {
                 method: 'POST', // or 'PUT'
                 body: JSON.stringify(objeto), // data can be `string` or {object}!
                 
             }
-        ).then(function(data) { 
-            debugger;
-            document.body.innerHTML = data.result;
+        ).then(res => {
+            this.setState({
+                // nombre: res,
+                loading: false
+            });
         });
-        // .then(
-        //     this.setState({
-        //         loading: false
-        //     })
-        // );
     }
 
     render() {
-        const {nombre, loading} = this.state;
+        const {nombre,correo,password, loading} = this.state;
         return (
             <div className="row">
                 <div className="col-12">
@@ -58,6 +54,9 @@ class Login extends Component {
                         <div className="d-flex flex-column">
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
+                                    {/* <p>{nombre}</p> */}
+                                    <p>{correo}</p>
+                                    <p>{password}</p>
                                     <h3 className="text-center">Inicia sesión</h3>
                                     <div className="d-flex flex-column">
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />

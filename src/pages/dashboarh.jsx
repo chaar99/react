@@ -3,9 +3,9 @@ import Lista from '../components/Lista/lista';
 import { Link }from "react-router-dom";
 
 class Dashboard extends Component {
+
     constructor(props) {
         super(props);
-        this.sumarContador = this.sumarContador.bind(this);
         this.state = {
             contador : 0,
             productos : [],

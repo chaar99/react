@@ -51,7 +51,7 @@ class Nuevo extends Component {
     }
 
     render() {
-        const {loading} = this.state;
+        const {ruta, loading} = this.state;
         return (
             <div className="row">
                 <div className="col-12">
@@ -62,6 +62,7 @@ class Nuevo extends Component {
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <h3 className="text-center">Da de alta un nuevo producto</h3>
                                     <div className="d-flex flex-column">
+                                        <p>{ruta}</p>
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="Nombre" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="descripcion" onChange={(ev) => this.onChangeInput(ev)} id="descripcion" />
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="stock" onChange={(ev) => this.onChangeInput(ev)} id="stock" />
