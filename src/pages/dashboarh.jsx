@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useEffect} from 'react';
 import Lista from '../components/Lista/lista';
 import { Link }from "react-router-dom";
 
@@ -6,38 +6,27 @@ class Dashboard extends Component {
 
     constructor(props) {
         super(props);
+        
         this.state = {
-            contador : 0,
+            loading: false,
             productos : [],
-            edad: 0,
             productsCar : []
         };
     }
     
     componentDidMount() {
+        this.setState({
+            loading: true
+        });
         fetch("http://localhost/aplicacion/proyectoDaw/index.php").then(res => res.json())
         .then(res => {
             this.setState({
-                productos: res
+                productos: res,
+                loading: false
             });
         });
     }
 
-    sumarContador() {
-        const {contador } = this.state;
-        this.setState({
-            contador: contador + 1,
-        });
-        
-    }
-
-    actualizarEdad(ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        this.setState({
-            edad: ev.target.value
-        });
-    } 
     addProductCart(id, name){
         const { productsCar } = this.state;
         const idsProducts = productsCar;
@@ -48,19 +37,42 @@ class Dashboard extends Component {
         
         localStorage.setItem("productos", productsCar);
         // console.log(`Has añadido el priducto ${name} con elID ${id} al carrito`)
-     }
-
+    }
+    
+    getProductsCar(){
+        debugger;
+        const idsProducts = localStorage.getItem("productos");
+        if(idsProducts) {
+            const idsProductsSplit = idsProducts.split(',');
+            this.setState({
+                productsCar: idsProductsSplit
+            });
+        }else{
+            this.setState({
+                productsCar: []
+            });
+        }
+    }
+    
+    // useEffect() {
+    //     this.getProductsCar();
+    // }
+    // useEffect(() => {
+    //     this.getProductsCar();
+    // }, [])
     render() {
-        const {productos, contador, edad} = this.state;
-        // const imag = productos.map((productoos) =>
-        // <p>Imagen: {productoos.ruta}, Nombre: {productoos.nombre}, descripcion: {productoos.descripcion}</p>)
+        const {productsCar,productos, loading} = this.state;
+        
         return (
             <div>
-                {/* <p>Tengo {edad} años</p>
-                <button onClick={() => this.sumarContador()}>Sumar</button>
-                <input type="number" onChange={(ev) => this.actualizarEdad(ev)} /> 
-                <dir>{imag}</dir> */}
-                <Lista productos={productos} addproductCart={(id, nombre)=> this.addproductCard()} />
+                {loading && <p>Estoy cargando.....</p>}
+                    {!loading && 
+                        <div className="d-flex flex-column">
+                            <p>{productsCar}</p>
+                            <Lista productos={productos} addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />
+                        </div>
+                    }
+                
             </div>
         );
     }

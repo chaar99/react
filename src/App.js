@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Menu from './components/menu';
+import Menu from './components/Menu/menu';
 import Footer from './components/footer';
 import Dashboard from './pages/dashboarh';
 import Prueba from './pages/prueba';

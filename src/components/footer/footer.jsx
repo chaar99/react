@@ -3,32 +3,41 @@ import { Component } from 'react';
 class Footer extends Component {
     constructor(props) {
         super(props);
-        this.sumarContador = this.sumarContador.bind(this);
-        this.state = {
-            contador : 0
-        };
-    }
-
-    sumarContador() {
-        const {contador } = this.state;
-        this.setState({
-            contador: contador + 1,
-        });
         
     }
-    
 
     render() {
-        const { contador } = this.state;
-        const { texto, productos } = this.props;
+        
         return (
-            <div className="c-footer">
-                <div>{texto}</div>
-                <button onClick={this.sumarContador}>clickame</button>
-                <p>El valor acumulado es {contador}</p>
-                <div className="productos">
-                 
-                </div>
+            <div className="page-footer font-small cyan darken-3">
+                {/* <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 py-5">
+                            <div class="mb-5 flex-center">
+                                <a class="fb-ic">
+                                    <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>                                
+                                <a class="tw-ic">
+                                    <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>
+                                <a class="gplus-ic">
+                                    <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>                                
+                                <a class="li-ic">
+                                    <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>                                
+                                <a class="ins-ic">
+                                    <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>                                
+                                <a class="pin-ic">
+                                    <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
+                <div className="footer-copyright text-center py-3">© 2020 Copyright: FunkoChar
+                </div>      
             </div>
         );
     }

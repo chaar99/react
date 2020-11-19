@@ -9,11 +9,6 @@ class Lista extends Component {
     render() {
         const {addProductCart, productos } = this.props;
         return (
-            // <div className="d-inline-block">
-            //     {productos.map(producto => (
-            //         <Producto elemento={producto} />
-            //     ))}
-            // </div>
             <div className="row">
                 <div className="col-10 mx-auto">
                     <div className="row">
