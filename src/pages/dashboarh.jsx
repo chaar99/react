@@ -9,7 +9,8 @@ class Dashboard extends Component {
         this.state = {
             contador : 0,
             productos : [],
-            edad: 0
+            edad: 0,
+            productsCar : []
         };
     }
     
@@ -37,6 +38,17 @@ class Dashboard extends Component {
             edad: ev.target.value
         });
     } 
+    addProductCart(id, name){
+        const { productsCar } = this.state;
+        const idsProducts = productsCar;
+        idsProducts.push(id);
+        this.setState({
+            productsCar: idsProducts
+        }); 
+        
+        localStorage.setItem("productos", productsCar);
+        // console.log(`Has añadido el priducto ${name} con elID ${id} al carrito`)
+     }
 
     render() {
         const {productos, contador, edad} = this.state;
@@ -48,7 +60,7 @@ class Dashboard extends Component {
                 <button onClick={() => this.sumarContador()}>Sumar</button>
                 <input type="number" onChange={(ev) => this.actualizarEdad(ev)} /> 
                 <dir>{imag}</dir> */}
-                <Lista productos={productos} />
+                <Lista productos={productos} addproductCart={(id, nombre)=> this.addproductCard()} />
             </div>
         );
     }

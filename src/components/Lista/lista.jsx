@@ -7,7 +7,7 @@ class Lista extends Component {
     }
 
     render() {
-        const { productos } = this.props;
+        const {addProductCart, productos } = this.props;
         return (
             // <div className="d-inline-block">
             //     {productos.map(producto => (
@@ -18,7 +18,7 @@ class Lista extends Component {
                 <div className="col-10 mx-auto">
                     <div className="row">
                         {productos.map(producto => (
-                            <Producto elemento={producto} />
+                            <Producto elemento={producto} addProductCart={addProductCart} />
                         ))}
                     </div>
                 </div>

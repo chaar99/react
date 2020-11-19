@@ -4,14 +4,12 @@ import {Card , Button} from "react-bootstrap";
 class Producto extends Component {
     constructor(props) {
         super(props);
+       
     }
 
-    addProductCart(id, name){
-        console.log(`Has añadido el producto ${name} con el id: ${id} al carrito.`);
-    }
     render() {
         
-        const { elemento } = this.props;
+        const {addProductCart, elemento } = this.props;
         return (
             
             <div className="col-12 col-sm-3 p-3">
@@ -20,7 +18,7 @@ class Producto extends Component {
                 <p className="text-center">{elemento.nombre}</p>
                 <p className="text-center">{elemento.precio}€ / Unidad</p>
                 {/* <Link className="btn btn-primary w-100" to="/detalle">comprar</Link> */}
-                <button className="btn btn-primary w-100" onClick={() => this.addProductCart(elemento.id_productos, elemento.nombre)}>Añadir al carrito</button>
+                <button className="btn btn-primary w-100" onClick={() => addProductCart(elemento.id_productos, elemento.nombre)}>Añadir al carrito</button>
             </div>
             // Esto son componentes de rect bootstrap
             // <Card style={{ width: '18rem' }}>
