@@ -7,7 +7,7 @@ class Login extends Component {
         this.state = {
             password: null,
             correo: null,
-            nombre : null
+            persona : {}
         };
     }
 
@@ -36,16 +36,18 @@ class Login extends Component {
                 body: JSON.stringify(objeto), // data can be `string` or {object}!
                 
             }
-        ).then(res => {
+        ).then(res => res.json())
+        .then(res => {
             this.setState({
-                // nombre: res,
+                
+                persona: res[0],
                 loading: false
             });
         });
     }
 
     render() {
-        const {nombre,correo,password, loading} = this.state;
+        const {persona, loading} = this.state;
         return (
             <div className="row">
                 <div className="col-12">
@@ -54,9 +56,8 @@ class Login extends Component {
                         <div className="d-flex flex-column">
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
-                                    {/* <p>{nombre}</p> */}
-                                    <p>{correo}</p>
-                                    <p>{password}</p>
+                                    <p>{persona.nombre}</p>
+                                
                                     <h3 className="text-center">Inicia sesión</h3>
                                     <div className="d-flex flex-column">
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />
