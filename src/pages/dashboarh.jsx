@@ -1,5 +1,6 @@
 import { Component, useEffect} from 'react';
 import Lista from '../components/Lista/lista';
+import Filtro from '../components/Filtro/filtro';
 import { Link }from "react-router-dom";
 
 class Dashboard extends Component {
@@ -68,7 +69,8 @@ class Dashboard extends Component {
                 {loading && <p>Estoy cargando.....</p>}
                     {!loading && 
                         <div className="d-flex flex-column">
-                            <p>{productsCar}</p>
+                            {/* <p>{productsCar}</p> */}
+                            <Filtro />
                             <Lista productos={productos} addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />
                         </div>
                     }

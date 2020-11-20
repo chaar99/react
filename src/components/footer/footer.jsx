@@ -1,5 +1,11 @@
 import { Component } from 'react';
+import {ReactComponent as Tw} from "../../assets/twitter.svg";
+import {ReactComponent as At} from "../../assets/at.svg";
+import {ReactComponent as Wh} from "../../assets/whatsapp.svg";
+import {ReactComponent as In} from "../../assets/instagram.svg";
 
+
+import './footer.css';
 class Footer extends Component {
     constructor(props) {
         super(props);
@@ -9,36 +15,23 @@ class Footer extends Component {
     render() {
         
         return (
-            <div className="page-footer font-small cyan darken-3">
-                {/* <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 py-5">
-                            <div class="mb-5 flex-center">
-                                <a class="fb-ic">
-                                    <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                                </a>                                
-                                <a class="tw-ic">
-                                    <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                                </a>
-                                <a class="gplus-ic">
-                                    <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                                </a>                                
-                                <a class="li-ic">
-                                    <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                                </a>                                
-                                <a class="ins-ic">
-                                    <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                                </a>                                
-                                <a class="pin-ic">
-                                    <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-                                </a>
-                            </div>
+            <footer className="d-flex flex-column bg-dark" >
+                
+                <div className="d-flex justify-content-center ">
+                    <div className="p-2 m-2">
+                        <div className="">
+                            <Tw className="w-edit h-25 m-5"/>
+                            <At className="w-edit h-25 m-5"/>
+                            <Wh className="w-edit h-25 m-5"/>
+                            <In className="w-edit h-25 m-5"/>
                         </div>
                     </div>
-                </div> */}
-                <div className="footer-copyright text-center py-3">© 2020 Copyright: FunkoChar
-                </div>      
-            </div>
+                    
+                </div>
+                <div className="d-flex justify-content-center">© 2020 Copyright:
+                    <a href="https://mdbootstrap.com/">FunkoChar</a>
+                </div>
+            </footer>
         );
     }
 };

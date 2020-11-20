@@ -40,16 +40,18 @@ class Login extends Component {
         .then(res => {
             this.setState({
                 
-                persona: res[0],
+                persona: res,
                 loading: false
             });
+            debugger;
         });
+       
     }
 
     render() {
         const {persona, loading} = this.state;
         return (
-            <div className="row">
+            <div className="row my-5">
                 <div className="col-12">
                     {loading && <p>Estoy cargando.....</p>}
                     {!loading && 
@@ -57,7 +59,6 @@ class Login extends Component {
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <p>{persona.nombre}</p>
-                                
                                     <h3 className="text-center">Inicia sesión</h3>
                                     <div className="d-flex flex-column">
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />

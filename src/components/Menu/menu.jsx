@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import { Navbar, Nav } from "react-bootstrap";
 import Cart from '../cart/cart';
-//import {ReactComponent as Logo} from "../../assets/logo_funkochar.svg";
+import Logo from "../Logo/logo";
 
+import './menu.css';
 class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          
         };
     }
 
@@ -24,9 +24,9 @@ class Menu extends Component {
 
 function BrandNav() {
     return (
-        <Navbar.Brand className="d-flex align-items-center justify-content-center">
-            {/* <Logo /> */}
-            logo
+        <Navbar.Brand>
+           <Logo />
+           
         </Navbar.Brand>
     );
 }
@@ -35,6 +35,9 @@ function MenuNav() {
     return(
         <Nav className="mr-auto">
             <Nav.Link href="login">Inicia sesion</Nav.Link>
+            <Nav.Link href="prueba">Registrate</Nav.Link>
+            <Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>
+            <Nav.Link href="/">Inicio</Nav.Link>
         </Nav>
     )
 }
