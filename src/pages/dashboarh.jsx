@@ -7,7 +7,6 @@ class Dashboard extends Component {
 
     constructor(props) {
         super(props);
-        
         this.state = {
             loading: false,
             productos : [],
@@ -26,6 +25,8 @@ class Dashboard extends Component {
                 loading: false
             });
         });
+        debugger;
+        this.getProductsCar();
     }
 
     addProductCart(id, name){
@@ -54,27 +55,18 @@ class Dashboard extends Component {
             });
         }
     }
-    
-    // useEffect() {
-    //     this.getProductsCar();
-    // }
-    // useEffect(() => {
-    //     this.getProductsCar();
-    // }, [])
     render() {
         const {productsCar,productos, loading} = this.state;
-        
         return (
             <div>
                 {loading && <p>Estoy cargando.....</p>}
-                    {!loading && 
-                        <div className="d-flex flex-column">
-                            {/* <p>{productsCar}</p> */}
-                            <Filtro />
-                            <Lista productos={productos} addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />
-                        </div>
-                    }
-                
+                {!loading && 
+                    <div className="d-flex flex-column">
+                        {/* <p>{productsCar}</p> */}
+                        <Filtro />
+                        <Lista productos={productos} addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />
+                    </div>
+                }
             </div>
         );
     }

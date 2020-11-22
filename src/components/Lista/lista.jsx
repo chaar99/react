@@ -12,8 +12,8 @@ class Lista extends Component {
             <div className="row">
                 <div className="col-10 mx-auto">
                     <div className="row">
-                        {productos.map(producto => (
-                            <Producto elemento={producto} addProductCart={addProductCart} />
+                        {productos.map((producto, index) => (
+                            <Producto elemento={producto} addProductCart={addProductCart} key={index} />
                         ))}
                     </div>
                 </div>
