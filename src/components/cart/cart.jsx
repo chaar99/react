@@ -9,7 +9,8 @@ class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cartOpen: false
+            cartOpen: false,
+            singelProductsCar: []
         };
     }
     
@@ -40,6 +41,7 @@ class Cart extends Component {
                 </Button>
                 <div className="cart-content" style={{width: this.widthCartContent()}}>
                     <CartContentHeader closeCar={() => this.closeCar()} emptyCar={() => this.emptyCar()}/>
+                    <CartContentProducts />
                 </div>
             </div>
         );
@@ -60,5 +62,9 @@ function CartContentHeader(props){
             </Button>
         </div>
     )
+};
+
+function CartContentProducts(props){
+    return "productos..."
 }
 export default Cart;
