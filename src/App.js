@@ -18,7 +18,8 @@ class App extends Component {
     super(props);
     this.state = {
         loading: false,
-        productos : []
+        productos : [],
+        productsCar : []
     };
   }
   componentDidMount() {
@@ -32,14 +33,40 @@ class App extends Component {
             loading: false
         });
     });
+    this.getProductsCar();
+  }
+  addProductCart(id, name){
+    const { productsCar } = this.state;
+    const idsProducts = productsCar;
+    idsProducts.push(id);
+    this.setState({
+        productsCar: idsProducts
+    }); 
+    
+    localStorage.setItem("productos", productsCar);
+    // console.log(`Has añadido el priducto ${name} con elID ${id} al carrito`)
+  }
+
+  getProductsCar(){
+      const idsProducts = localStorage.getItem("productos");
+      if(idsProducts) {
+          const idsProductsSplit = idsProducts.split(',');
+          this.setState({
+              productsCar: idsProductsSplit
+          });
+      }else{
+          this.setState({
+              productsCar: []
+          });
+      }
   }
   render() {
-    const {productos, loading} = this.state;
+    const {productos, loading, productsCar} = this.state;
     return (
       <div>
-        <Menu />
+        <Menu productos={productos} productsCar={productsCar}/>
           <Router>
-              <Route exact path="/" component={()=> <Dashboard productos={productos} loading={loading} />}/>
+              <Route exact path="/" component={()=> <Dashboard productos={productos} loading={loading} addProductCart={(id, nombre)=> this.addProductCart(id, nombre)}/>}/>
               <Route exact path="/prueba" component={Prueba} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/nuevoProducto" component={Nuevo} />
