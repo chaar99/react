@@ -7,27 +7,28 @@ class Dashboard extends Component {
 
     constructor(props) {
         super(props);
+        this.getProductsCar();
         this.state = {
-            loading: false,
-            productos : [],
+           // loading: false,
+           // productos : [],
             productsCar : []
         };
     }
     
-    componentDidMount() {
-        this.setState({
-            loading: true
-        });
-        fetch("http://localhost/aplicacion/proyectoDaw/index.php").then(res => res.json())
-        .then(res => {
-            this.setState({
-                productos: res,
-                loading: false
-            });
-        });
-        debugger;
-        this.getProductsCar();
-    }
+    // componentDidMount() {
+    //     this.setState({
+    //         loading: true
+    //     });
+    //     fetch("http://localhost/aplicacion/proyectoDaw/index.php").then(res => res.json())
+    //     .then(res => {
+    //         this.setState({
+    //             productos: res,
+    //             loading: false
+    //         });
+    //     });
+    //     debugger;
+    //     this.getProductsCar();
+    // }
 
     addProductCart(id, name){
         const { productsCar } = this.state;
@@ -42,7 +43,6 @@ class Dashboard extends Component {
     }
     
     getProductsCar(){
-        debugger;
         const idsProducts = localStorage.getItem("productos");
         if(idsProducts) {
             const idsProductsSplit = idsProducts.split(',');
@@ -56,7 +56,8 @@ class Dashboard extends Component {
         }
     }
     render() {
-        const {productsCar,productos, loading} = this.state;
+        const {productsCar} = this.state;
+        const {productos, loading} = this.props;
         return (
             <div>
                 {loading && <p>Estoy cargando.....</p>}

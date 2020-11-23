@@ -7,7 +7,7 @@ class Lista extends Component {
     }
 
     render() {
-        const {addProductCart, productos } = this.props;
+        const {addProductCart, productos} = this.props;
         return (
             <div className="row">
                 <div className="col-10 mx-auto">
