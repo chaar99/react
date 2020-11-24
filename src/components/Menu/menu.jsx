@@ -12,12 +12,12 @@ class Menu extends Component {
     }
 
     render() {
-        const {productos, productsCar} = this.props;
+        const { productos, productsCar, onEmptyCart } = this.props;
         return (
-            <Navbar  bg="dark" variant="dark"  className="top-menu">
+            <Navbar bg="dark" variant="dark" className="top-menu">
                 <BrandNav />
                 <MenuNav />
-                <Cart productos={productos} productsCar={productsCar}/>
+                <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} />
             </Navbar>
         );
     }
@@ -27,13 +27,12 @@ function BrandNav() {
     return (
         <Navbar.Brand>
            <Logo />
-           
         </Navbar.Brand>
     );
 }
 
 function MenuNav() {
-    return(
+    return (
         <Nav className="mr-auto">
             <Nav.Link href="login">Inicia sesion</Nav.Link>
             <Nav.Link href="prueba">Registrate</Nav.Link>
@@ -42,4 +41,5 @@ function MenuNav() {
         </Nav>
     )
 }
+
 export default Menu;

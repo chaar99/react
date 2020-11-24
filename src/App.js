@@ -1,17 +1,12 @@
 import { Component } from 'react';
 import Menu from './components/Menu/menu';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 import Dashboard from './pages/dashboarh';
 import Prueba from './pages/prueba';
 import Login from './pages/login';
 import Nuevo from './pages/nuevoProducto';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +17,7 @@ class App extends Component {
         productsCar : []
     };
   }
+
   componentDidMount() {
     this.setState({
         loading: true
@@ -35,38 +31,49 @@ class App extends Component {
     });
     this.getProductsCar();
   }
-  addProductCart(id, name){
+
+  addProductCart(id, name) {
     const { productsCar } = this.state;
     const idsProducts = productsCar;
     idsProducts.push(id);
     this.setState({
         productsCar: idsProducts
     }); 
-    
     localStorage.setItem("productos", productsCar);
-    // console.log(`Has añadido el priducto ${name} con elID ${id} al carrito`)
   }
 
-  getProductsCar(){
-      const idsProducts = localStorage.getItem("productos");
-      if(idsProducts) {
-          const idsProductsSplit = idsProducts.split(',');
-          this.setState({
-              productsCar: idsProductsSplit
-          });
-      }else{
-          this.setState({
-              productsCar: []
-          });
-      }
+  getProductsCar() {
+    const idsProducts = localStorage.getItem("productos");
+    this.setState({
+        productsCar: idsProducts ? idsProducts.split(',') : []
+    });
   }
+
+  onEmptyCart() {
+    localStorage.setItem("productos", []);
+    this.setState({
+      productsCar: []
+    })
+  }
+
+  prueba(valores) {
+    debugger;
+  }
+
   render() {
-    const {productos, loading, productsCar} = this.state;
+    const { productos, loading, productsCar } = this.state;
     return (
       <div>
-        <Menu productos={productos} productsCar={productsCar}/>
+        <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)}/>
           <Router>
-              <Route exact path="/" component={()=> <Dashboard productos={productos} loading={loading} addProductCart={(id, nombre)=> this.addProductCart(id, nombre)}/>}/>
+              <Route exact path="/" component={()=>
+                <Dashboard
+                  productos={productos}
+                  loading={loading}
+                  addProductCart={(id, nombre)=> this.addProductCart(id, nombre)}
+                  aplicarFiltros={(valores)=> this.prueba(valores)}
+                />}
+              />
               <Route exact path="/prueba" component={Prueba} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/nuevoProducto" component={Nuevo} />

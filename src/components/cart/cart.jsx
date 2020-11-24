@@ -11,50 +11,43 @@ class Cart extends Component {
         super(props);
         this.state = {
             cartOpen: false,
-            singelProductsCar: []
         };
-        this.useEfect();
     }
     
-    openCar(){
+    openCar() {
         this.setState({
             cartOpen: true
         });
         document.body.style.overflow = "hidden";
     }
-    closeCar(){
+
+    closeCar() {
         this.setState({
             cartOpen: false
         });
         document.body.style.overflow = "scroll";
     }
-    emptyCar(){
+
+    emptyCar() {
         localStorage.removeItem("productos");
     }
-    widthCartContent(){
-        const {cartOpen} = this.state;
-        return cartOpen? 400: 0;
+
+    widthCartContent() {
+        const { cartOpen } = this.state;
+        return cartOpen ? 400 : 0;
     }
-    useEfect(){
-        const {singelProductsCar} = this.state;
-        const {productsCar} = this.props;
-        const allProductsId = removeArrayDuplicates(productsCar);
-        this.setState({
-            singelProductsCar: allProductsId,
-        });
-    }
+
     render() {
-        const {productos, productsCar} = this.props;
-        const {singelProductsCar} = this.state;
+        const { productos, productsCar, onEmptyCart } = this.props;
+        const allProductsId = removeArrayDuplicates(productsCar);
         return (
             <div>
-                <p className="c-p">hols{singelProductsCar}</p>
                 <Button variant="link" className="cart">
                     <CartEmpty onClick={() =>this.openCar()}/>
                 </Button>
                 <div className="cart-content" style={{width: this.widthCartContent()}}>
-                    <CartContentHeader closeCar={() => this.closeCar()} emptyCar={() => this.emptyCar()}/>
-                    {singelProductsCar.map((idProductsCart, index) =>(
+                    <CartContentHeader closeCar={() => this.closeCar()} onEmptyCart={onEmptyCart}/>
+                    {allProductsId.map((idProductsCart, index) =>(
                         <CartContentProducts productos={productos} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
                     ))}
                 </div>
@@ -63,24 +56,24 @@ class Cart extends Component {
     }
 };
 
-function CartContentHeader(props){
-    const { closeCar, emptyCar} = props;
+function CartContentHeader(props) {
+    const { closeCar, onEmptyCart } = props;
     return (
         <div className="cart-content-header">
             <div>
                 <Close onClick={() => closeCar()} />
                 <h2>Carrito</h2>
             </div>
-            <Button variant="link">
+            <Button variant="link" onClick={() => onEmptyCart()}>
                 vaciar
-                <Vaciar onClick={() => emptyCar()} />
+                <Vaciar/>
             </Button>
         </div>
     )
 };
 
-function CartContentProducts(props){
-    const {productos} = props;
+function CartContentProducts(props) {
+    const { productos } = props;
     return "productos..."
 }
 export default Cart;

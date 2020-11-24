@@ -9,14 +9,11 @@ import './footer.css';
 class Footer extends Component {
     constructor(props) {
         super(props);
-        
     }
 
     render() {
-        
         return (
             <footer className="d-flex flex-column bg-dark" >
-                
                 <div className="d-flex justify-content-center ">
                     <div className="p-2 m-2">
                         <div className="">
@@ -26,7 +23,6 @@ class Footer extends Component {
                             <In className="w-edit h-25 m-5"/>
                         </div>
                     </div>
-                    
                 </div>
                 <div className="d-flex justify-content-center">© 2020 Copyright:
                     <a href="https://mdbootstrap.com/">FunkoChar</a>
