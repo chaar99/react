@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { BrowserRouter as Route, Link } from "react-router-dom";
+import { email } from "../utils/validaciones";
 
 class Prueba extends Component {
     constructor(props) {
@@ -27,15 +28,9 @@ class Prueba extends Component {
         ev.stopPropagation();
         ev.preventDefault();
         var valor = ev.target.value;
-        if(/^[a-zA-Z0-9.]+@[a-zA-Z]{5,10}.[a-zA-Z]{2,3}$/.test(valor)){
-            this.setState({
-                validCorreo: true
-            });
-        } else {
-            this.setState({
-                validCorreo: false
-            });
-        }
+        this.setState({
+            validCorreo: email(ev, valor)
+        });
     }
 
     validarTexto(ev) {
