@@ -9,7 +9,8 @@ class Nuevo extends Component {
             stock: null,
             descripcion: null,  
             precio: null,
-            ruta: null   
+            ruta: null,
+            categoria: null
         };
     }
 
@@ -27,13 +28,14 @@ class Nuevo extends Component {
         });
         ev.stopPropagation();
         ev.preventDefault();
-        const {nombre, stock, descripcion, precio, ruta} = this.state;
+        const {nombre, stock, descripcion, precio, ruta, categoria} = this.state;
         const objeto = {
             nombre: nombre,
             stock: stock,
             descripcion: descripcion,  
             precio: precio,
-            ruta: ruta 
+            ruta: ruta,
+            categoria: categoria
         }
         alert(typeof(objeto));
         fetch("http://localhost/aplicacion/proyectoDaw/nuevoPorducto.php",
@@ -51,7 +53,7 @@ class Nuevo extends Component {
     }
 
     render() {
-        const {ruta, loading} = this.state;
+        const {loading, categoria} = this.state;
         return (
             <div className="row">
                 <div className="col-12">
@@ -62,12 +64,18 @@ class Nuevo extends Component {
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <h3 className="text-center">Da de alta un nuevo producto</h3>
                                     <div className="d-flex flex-column">
-                                        <p>{ruta}</p>
+                                        <p>{categoria}</p>
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="Nombre" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="descripcion" onChange={(ev) => this.onChangeInput(ev)} id="descripcion" />
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="stock" onChange={(ev) => this.onChangeInput(ev)} id="stock" />
                                         <input className="mr-2 mt-2 form-control" type="number" placeholder="precio" onChange={(ev) => this.onChangeInput(ev)} id="precio" />
                                         <input className="mr-2 mt-2" type="file" name="archivosubido"  onChange={(ev) => this.onChangeInput(ev)} id="ruta"/>
+                                        <select name="categoria" id="categoria" onChange={(ev) => this.onChangeInput(ev)}>
+                                            <option value="Harry_Potter">Harry Potter</option>
+                                            <option value="Marvel">Marvel</option>
+                                            <option value="Star_wars">Star wars</option>
+                                            <option value="Dibujos">Dibujos</option>
+                                        </select>
                                         <div>
                                             <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Dar de alta</button>
                                         </div>

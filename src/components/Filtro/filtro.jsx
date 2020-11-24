@@ -1,19 +1,20 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Filtro extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filtro : ""
+            filtro : null,
+            persona: []
         };
     }
 
     filtro(ev) {
+        
         ev.stopPropagation();
         ev.preventDefault();
         this.setState({
-            [ev.target.id]:ev.target.value
+            filtro: ev.target.value
         });
     }
     
@@ -23,37 +24,34 @@ class Filtro extends Component {
         });
         ev.stopPropagation();
         ev.preventDefault();
-        const {password, correo} = this.state;
+        const {filtro} = this.state;
         const objeto = {
-            password : password,
-            correo : correo
+            filtro : filtro
         }
-        fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php",
+        fetch("http://localhost/aplicacion/proyectoDaw/filtro.php",
             {
-                method: 'POST', // or 'PUT'
-                body: JSON.stringify(objeto), // data can be `string` or {object}!
+                method: 'POST',
+                body: JSON.stringify(objeto),
                 
             }
         ).then(res => res.json())
         .then(res => {
             this.setState({
-                
                 persona: res,
                 loading: false
             });
-            debugger;
         });
        
     }
 
     render() {
-        const {persona, loading} = this.state;
+        const {loading, persona} = this.state;
         return (
             <div className="row my-5">
+                <p>{persona}</p>
                 <div className="col-12">
-                    
-                    <button onClick={(ev) => this.filtro(ev)}>Harry potter</button>
-                    <button onClick={(ev) => this.filtro(ev)}> Marvel</button>
+                    <button  id="Harry_Potter" onClick={(ev) => this.filtro(ev)}>Harry potter</button>
+                    <button id="Star_wars" onClick={(ev) => this.filtro(ev)}> Star wars</button>
                 </div>
             </div>
         );
