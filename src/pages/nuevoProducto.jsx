@@ -59,7 +59,7 @@ class Nuevo extends Component {
                 <div className="col-12">
                     {loading && <p>Estoy cargando.....</p>}
                     {!loading && 
-                        <div className="d-flex flex-column">
+                        <div className="d-flex flex-column my-5">
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <h3 className="text-center">Da de alta un nuevo producto</h3>
@@ -69,13 +69,14 @@ class Nuevo extends Component {
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="descripcion" onChange={(ev) => this.onChangeInput(ev)} id="descripcion" />
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="stock" onChange={(ev) => this.onChangeInput(ev)} id="stock" />
                                         <input className="mr-2 mt-2 form-control" type="number" placeholder="precio" onChange={(ev) => this.onChangeInput(ev)} id="precio" />
-                                        <input className="mr-2 mt-2" type="file" name="archivosubido"  onChange={(ev) => this.onChangeInput(ev)} id="ruta"/>
-                                        <select name="categoria" id="categoria" onChange={(ev) => this.onChangeInput(ev)}>
+                                        <select className=" mr-2 mt-2 custom-select" name="categoria" id="categoria" onChange={(ev) => this.onChangeInput(ev)}>
+                                            <option disabled="disabled" selected="selected">Selecciona uno</option>
                                             <option value="Harry_Potter">Harry Potter</option>
                                             <option value="Marvel">Marvel</option>
                                             <option value="Star_wars">Star wars</option>
                                             <option value="Dibujos">Dibujos</option>
                                         </select>
+                                        <input className="mr-2 mt-2" type="file" name="archivosubido"  onChange={(ev) => this.onChangeInput(ev)} id="ruta"/>                      
                                         <div>
                                             <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Dar de alta</button>
                                         </div>

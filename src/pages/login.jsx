@@ -55,7 +55,7 @@ class Login extends Component {
                 <div className="col-12">
                     {loading && <p>Estoy cargando.....</p>}
                     {!loading && 
-                        <div className="d-flex flex-column">
+                        <div className="d-flex flex-column my-5">
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <p>{persona.nombre}</p>

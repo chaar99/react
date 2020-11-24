@@ -34,12 +34,30 @@ class Prueba extends Component {
     onChangeInput(ev) {
         ev.stopPropagation();
         ev.preventDefault();
-        debugger;
         this.setState({
             [ev.target.id]:ev.target.value
         });
     }
-    
+    validarEmail(ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        var valor = ev.target.value;
+        if(/^[a-zA-Z0-9.]+@[a-zA-Z]{5,10}.[a-zA-Z]{2,3}$/.test(valor)){
+            // poner el cuadrado a verde
+        } else {
+            //poner cuadrado a rojo
+        }
+    }
+    validarTexto(ev){
+        ev.stopPropagation();
+        ev.preventDefault();
+        var valor = ev.target.value;
+        if(/^[a-zA-Z]+$/.test(valor)){
+            // poner el cuadrado a verde
+        } else {
+            //poner cuadrado a rojo
+        }
+    }
     onLogearse(ev) {
         this.setState({
             loading: true
@@ -75,20 +93,17 @@ class Prueba extends Component {
                 <div className="col-12">
                     {loading && <p>Estoy cargando.....</p>}
                     {!loading && 
-                        <div className="d-flex flex-column">
+                        <div className="d-flex flex-column my-5">
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <h3 className="text-center">Registrate</h3>
                                     <div className="d-flex flex-column">
-                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />
-                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Name" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
-                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Surname" onChange={(ev) => this.onChangeInput(ev)} id="apell" />
+                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} id="correo" />
+                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Name" onBlur={(ev) => this.validarTexto(ev)} onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
+                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Surname" onBlur={(ev) => this.validarTexto(ev)} onChange={(ev) => this.onChangeInput(ev)} id="apell" />
                                         <input className="mr-2 mt-2 form-control" type="password" placeholder="Password" onChange={(ev) => this.onChangeInput(ev)} id="password" />
                                         <input className="mr-2 mt-2 form-control" type="text" placeholder="DNI" onChange={(ev) => this.onChangeInput(ev)} id="dni" />
-                                        {/* <input type="file" name="archivosubido"></input> */}
-                                        <div>
-                                            <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
-                                        </div>
+                                        <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
                                     </div>
                                 </div>
                             </div>
