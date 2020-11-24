@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Link }from "react-router-dom";
 
 class Nuevo extends Component {
     constructor(props) {
@@ -37,19 +36,16 @@ class Nuevo extends Component {
             ruta: ruta,
             categoria: categoria
         }
-        alert(typeof(objeto));
         fetch("http://localhost/aplicacion/proyectoDaw/nuevoPorducto.php",
             {
-                method: 'POST', // or 'PUT'
-                body: JSON.stringify(objeto), // data can be `string` or {object}!
-                
+                method: 'POST', 
+                body: JSON.stringify(objeto), 
             }
         ).then(
             this.setState({
                 loading: false
             })
         );
-        
     }
 
     render() {

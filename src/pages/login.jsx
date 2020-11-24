@@ -32,20 +32,16 @@ class Login extends Component {
         }
         fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php",
             {
-                method: 'POST', // or 'PUT'
-                body: JSON.stringify(objeto), // data can be `string` or {object}!
-                
+                method: 'POST',
+                body: JSON.stringify(objeto),
             }
         ).then(res => res.json())
         .then(res => {
             this.setState({
-                
                 persona: res,
                 loading: false
             });
-            debugger;
         });
-       
     }
 
     render() {
