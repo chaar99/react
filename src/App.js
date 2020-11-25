@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import Menu from './components/Menu/menu';
-import Footer from './components/Footer';
+import Footer from './components/Footer/footer';
 import Dashboard from './pages/dashboarh';
 import Prueba from './pages/prueba';
 import Login from './pages/login';
