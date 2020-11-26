@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import {ReactComponent as CartEmpty} from "../../assets/cart-empty.svg";
 import {ReactComponent as Close} from "../../assets/close.svg";
 import {ReactComponent as Vaciar} from "../../assets/garbage.svg";
-import {removeArrayDuplicates} from '../../utils/arrayFunciones'
+import {removeArrayDuplicates, countDuplicatesItemArray, removeItemArray} from '../../utils/arrayFunciones'
 
 import './cart.css';
 class Cart extends Component {
@@ -32,6 +32,21 @@ class Cart extends Component {
         localStorage.removeItem("productos");
     }
 
+    increaseQuantity(id) {
+        const { productsCar, getProductsCar } = this.props;
+        const arrayItemsCart = productsCar;
+        arrayItemsCart.push(id);
+        localStorage.setItem("productos", arrayItemsCart);
+        getProductsCar();
+    }
+
+    decreaseQuantity(id) {
+        const { productsCar, getProductsCar } = this.props;
+        const result = removeItemArray(productsCar, id.toString());
+        localStorage.setItem("productos", result);
+        getProductsCar();
+    }
+
     widthCartContent() {
         const { cartOpen } = this.state;
         return cartOpen ? 400 : 0;
@@ -48,8 +63,10 @@ class Cart extends Component {
                 <div className="cart-content" style={{width: this.widthCartContent()}}>
                     <CartContentHeader closeCar={() => this.closeCar()} onEmptyCart={onEmptyCart}/>
                     {allProductsId.map((idProductsCart, index) =>(
-                        <CartContentProducts productos={productos} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
+                        <CartContentProducts productos={productos} increaseQuantity={(id) => this.increaseQuantity(id)} 
+                            decreaseQuantity={(id) => this.decreaseQuantity(id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
                     ))}
+                    <CartContentFooter />
                 </div>
             </div>
         );
@@ -73,7 +90,56 @@ function CartContentHeader(props) {
 };
 
 function CartContentProducts(props) {
-    const { productos } = props;
-    return "productos..."
+    const { productos, idsProductsCart, idProductsCart, increaseQuantity, decreaseQuantity } = props;
+    return productos.map((producto, index) => {
+        if(producto.id_productos === idProductsCart){
+            const quantity = countDuplicatesItemArray(producto.id_productos, idsProductsCart);
+            return(
+                <RenderProduct 
+                    key={index}
+                    producto={producto}
+                    quantity={quantity}
+                    increaseQuantity={increaseQuantity}
+                    decreaseQuantity={decreaseQuantity}
+                />
+            )
+        }
+    })
+}
+
+function RenderProduct(props) {
+    const { producto, quantity, increaseQuantity, decreaseQuantity } = props;
+    return(
+        <div className="contenido">
+            <img src={"./img/"+ producto.ruta} style={{ height: 25, width:50 }} />
+            <div>
+                <div>
+                    <h3>{producto.nombre}</h3>
+                    <p>{producto.precio}€ / Unidad</p>
+                </div>
+                <div>
+                    <p>cantidad: {quantity}</p>
+                    <div>
+                        <button onClick={() => increaseQuantity(producto.id_productos)}>+</button>
+                        <button onClick={() => decreaseQuantity(producto.id_productos)}>-</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function CartContentFooter(props) {
+    const { cartTotalPre } = props;
+    return(
+        <div>
+            <div>
+                <p>Total: </p>
+                {/* <p>{cartTotalPre} €</p>  */}
+                <p>98</p>
+            </div>
+            <button>Tramitar pedido</button>
+        </div>
+    )
 }
 export default Cart;

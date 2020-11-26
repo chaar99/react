@@ -12,12 +12,12 @@ class Menu extends Component {
     }
 
     render() {
-        const { productos, productsCar, onEmptyCart } = this.props;
+        const { productos, productsCar, onEmptyCart, getProductsCar } = this.props;
         return (
             <Navbar bg="dark" variant="dark" className="top-menu">
                 <BrandNav />
                 <MenuNav />
-                <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} />
+                <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} getProductsCar={getProductsCar} />
             </Navbar>
         );
     }

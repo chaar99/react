@@ -64,7 +64,7 @@ class App extends Component {
     const { productos, loading, productsCar } = this.state;
     return (
       <div>
-        <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)}/>
+        <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
           <Router>
               <Route exact path="/" component={()=>
                 <Dashboard
