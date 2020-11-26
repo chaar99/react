@@ -11,6 +11,7 @@ class Cart extends Component {
         super(props);
         this.state = {
             cartOpen: false,
+            cartTotalPre: 0
         };
     }
     
@@ -54,6 +55,7 @@ class Cart extends Component {
 
     render() {
         const { productos, productsCar, onEmptyCart } = this.props;
+        const { cartTotalPre } = this.state;
         const allProductsId = removeArrayDuplicates(productsCar);
         return (
             <div>
@@ -62,11 +64,13 @@ class Cart extends Component {
                 </Button>
                 <div className="cart-content" style={{width: this.widthCartContent()}}>
                     <CartContentHeader closeCar={() => this.closeCar()} onEmptyCart={onEmptyCart}/>
-                    {allProductsId.map((idProductsCart, index) =>(
-                        <CartContentProducts productos={productos} increaseQuantity={(id) => this.increaseQuantity(id)} 
-                            decreaseQuantity={(id) => this.decreaseQuantity(id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
-                    ))}
-                    <CartContentFooter />
+                    <div className="cart-content-products">
+                        {allProductsId.map((idProductsCart, index) =>(
+                            <CartContentProducts productos={productos} increaseQuantity={(id) => this.increaseQuantity(id)} 
+                                decreaseQuantity={(id) => this.decreaseQuantity(id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
+                        ))}
+                    </div>
+                    <CartContentFooter cartTotalPre={cartTotalPre}/>
                 </div>
             </div>
         );
@@ -110,9 +114,9 @@ function CartContentProducts(props) {
 function RenderProduct(props) {
     const { producto, quantity, increaseQuantity, decreaseQuantity } = props;
     return(
-        <div className="contenido">
+        <div className="cart-content-product">
             <img src={"./img/"+ producto.ruta} style={{ height: 25, width:50 }} />
-            <div>
+            <div className="cart-content-product-info">
                 <div>
                     <h3>{producto.nombre}</h3>
                     <p>{producto.precio}€ / Unidad</p>
@@ -132,11 +136,10 @@ function RenderProduct(props) {
 function CartContentFooter(props) {
     const { cartTotalPre } = props;
     return(
-        <div>
-            <div>
+        <div className="cart-content-footer">
+            <div className="primer">
                 <p>Total: </p>
-                {/* <p>{cartTotalPre} €</p>  */}
-                <p>98</p>
+                <p>{cartTotalPre} €</p>
             </div>
             <button>Tramitar pedido</button>
         </div>
