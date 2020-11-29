@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { email, longitudPass } from '../utils/validaciones';
 
 class Login extends Component {
     constructor(props) {
@@ -7,7 +8,10 @@ class Login extends Component {
         this.state = {
             password: null,
             correo: null,
-            persona : {}
+            persona: {},
+            validCorreo: null,
+            validCont: null,
+            validPass: null
         };
     }
 
@@ -44,8 +48,22 @@ class Login extends Component {
         });
     }
 
+    validarEmail(ev) {
+        var valor = ev.target.value;
+        this.setState({
+            validCorreo: email(ev, valor)
+        });
+    }
+
+    validarPass(ev) {
+        var valor = ev.target.value;
+        this.setState({
+            validPass: longitudPass(ev, valor)
+        })
+    }
+
     render() {
-        const {persona, loading} = this.state;
+        const { loading, validCorreo,validPass } = this.state;
         return (
             <div className="row my-5">
                 <div className="col-12">
@@ -54,11 +72,12 @@ class Login extends Component {
                         <div className="d-flex flex-column my-5">
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
-                                    <p>{persona.nombre}</p>
                                     <h3 className="text-center">Inicia sesión</h3>
                                     <div className="d-flex flex-column">
-                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Email" onChange={(ev) => this.onChangeInput(ev)} id="correo" />
-                                        <input className="mr-2 mt-2 form-control" type="password" placeholder="Password" onChange={(ev) => this.onChangeInput(ev)} id="password" />
+                                        <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" placeholder="Email" id="correo" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
+                                            {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                                        <input className={`mr-2 mt-2 form-control ${validPass ? "border-success" : validPass === false? "border-danger": ""}`} type="password" placeholder="Password" id="password" onBlur={(ev) => this.validarPass(ev)} onChange={(ev) => this.onChangeInput(ev)} />
+                                            {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                                         <div>
                                             <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Inicia sesión</button>
                                         </div>
@@ -67,7 +86,7 @@ class Login extends Component {
                             </div>
                             <div className="text-center mt-3">
                                     <p>¿No tienes una cuenta?
-                                        <Link className="ml-2" to="/prueba">Registrate</Link>
+                                        <Link className="ml-2" to="/registro">Registrate</Link>
                                     </p>    
                             </div>
                         </div>

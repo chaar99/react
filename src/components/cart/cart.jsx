@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import {ReactComponent as CartEmpty} from "../../assets/cart-empty.svg";
 import {ReactComponent as Close} from "../../assets/close.svg";
 import {ReactComponent as Vaciar} from "../../assets/garbage.svg";
-import {removeArrayDuplicates, countDuplicatesItemArray, removeItemArray} from '../../utils/arrayFunciones'
+import {removeArrayDuplicates, countDuplicatesItemArray, removeItemArray, totalAmount} from '../../utils/arrayFunciones'
 
 import './cart.css';
 class Cart extends Component {
@@ -55,7 +55,6 @@ class Cart extends Component {
 
     render() {
         const { productos, productsCar, onEmptyCart } = this.props;
-        const { cartTotalPre } = this.state;
         const allProductsId = removeArrayDuplicates(productsCar);
         return (
             <div>
@@ -70,7 +69,7 @@ class Cart extends Component {
                                 decreaseQuantity={(id) => this.decreaseQuantity(id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
                         ))}
                     </div>
-                    <CartContentFooter cartTotalPre={cartTotalPre}/>
+                    <CartContentFooter productos={productos} productsCar={productsCar} />
                 </div>
             </div>
         );
@@ -134,12 +133,12 @@ function RenderProduct(props) {
 }
 
 function CartContentFooter(props) {
-    const { cartTotalPre } = props;
+    const { productos, productsCar } = props;
     return(
         <div className="cart-content-footer">
             <div className="primer">
                 <p>Total: </p>
-                <p>{cartTotalPre} €</p>
+                <p>{totalAmount(productsCar, productos)} €</p>
             </div>
             <button>Tramitar pedido</button>
         </div>

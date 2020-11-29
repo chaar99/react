@@ -35,7 +35,7 @@ function MenuNav() {
     return (
         <Nav className="mr-auto">
             <Nav.Link href="login">Inicia sesion</Nav.Link>
-            <Nav.Link href="prueba">Registrate</Nav.Link>
+            <Nav.Link href="registro">Registrate</Nav.Link>
             <Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>
             <Nav.Link href="/">Inicio</Nav.Link>
         </Nav>

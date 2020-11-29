@@ -2,7 +2,7 @@ import { Component } from 'react';
 import Menu from './components/Menu/menu';
 import Footer from './components/Footer/footer';
 import Dashboard from './pages/dashboarh';
-import Prueba from './pages/prueba';
+import Prueba from './pages/registro';
 import Login from './pages/login';
 import Nuevo from './pages/nuevoProducto';
 
@@ -74,7 +74,7 @@ class App extends Component {
                   aplicarFiltros={(valores)=> this.prueba(valores)}
                 />}
               />
-              <Route exact path="/prueba" component={Prueba} />
+              <Route exact path="/registro" component={Prueba} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/nuevoProducto" component={Nuevo} />
           </Router>
