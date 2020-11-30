@@ -38,6 +38,7 @@ function MenuNav() {
             <Nav.Link href="registro">Registrate</Nav.Link>
             <Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>
             <Nav.Link href="/">Inicio</Nav.Link>
+            <Nav.Link href="tramite">Tramite</Nav.Link>
         </Nav>
     )
 }

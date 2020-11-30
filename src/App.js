@@ -5,6 +5,7 @@ import Dashboard from './pages/dashboarh';
 import Prueba from './pages/registro';
 import Login from './pages/login';
 import Nuevo from './pages/nuevoProducto';
+import Tramite from './pages/tramite';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -77,6 +78,7 @@ class App extends Component {
               <Route exact path="/registro" component={Prueba} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/nuevoProducto" component={Nuevo} />
+              <Route exact path="/tramite" component={Tramite} />
           </Router>
       <Footer />
      </div>
