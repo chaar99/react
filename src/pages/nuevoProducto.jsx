@@ -1,15 +1,21 @@
 import { Component } from 'react';
+import { compruebaText, stock, precio } from "../utils/validaciones";
 
 class Nuevo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             nombre: null,
+            validNombe: null,
             stock: null,
+            validSt: null,
             descripcion: null,  
+            validDesc: null,
             precio: null,
+            validP: null,
             ruta: null,
-            categoria: null
+            categoria: null,
+            validCa: null
         };
     }
 
@@ -21,6 +27,28 @@ class Nuevo extends Component {
         });
     }
     
+    validarTexto(ev, valorState) {
+        var valor = ev.target.value;
+        this.setState({
+            [valorState]: compruebaText(ev, valor)
+        })
+    }
+
+    validarStock(ev) {
+        var valor = (ev.target.value);
+        alert(typeof(valor))
+        this.setState({
+            validSt: stock(ev, valor)
+        })
+    }
+
+    validarPrecio(ev) {
+        var valor = parseFloat(ev.target.value);
+        this.setState({
+            validP: precio(ev, valor)
+        })
+    }
+
     onLogearse(ev) {
         this.setState({
             loading: true
@@ -49,7 +77,7 @@ class Nuevo extends Component {
     }
 
     render() {
-        const {loading, categoria} = this.state;
+        const { loading, validNombe, validDesc, validSt, validP, validCa, ruta } = this.state;
         return (
             <div className="row">
                 <div className="col-12">
@@ -59,12 +87,15 @@ class Nuevo extends Component {
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <h3 className="text-center">Da de alta un nuevo producto</h3>
-                                    <div className="d-flex flex-column">
-                                        <p>{categoria}</p>
-                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="Nombre" onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
-                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="descripcion" onChange={(ev) => this.onChangeInput(ev)} id="descripcion" />
-                                        <input className="mr-2 mt-2 form-control" type="text" placeholder="stock" onChange={(ev) => this.onChangeInput(ev)} id="stock" />
-                                        <input className="mr-2 mt-2 form-control" type="number" placeholder="precio" onChange={(ev) => this.onChangeInput(ev)} id="precio" />
+                                    <form>
+                                        <input className={`mr-2 mt-2 form-control ${validNombe ? "border-success" : validNombe === false? "border-danger": ""}`} type="text" placeholder="Nombre" onBlur={(ev) => this.validarTexto(ev, "validNombe")} onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
+                                            {validNombe === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                                        <input className={`mr-2 mt-2 form-control ${validDesc ? "border-success" : validDesc === false? "border-danger": ""}`} type="text" placeholder="Descripción" onBlur={(ev) => this.validarTexto(ev, "validDesc")} onChange={(ev) => this.onChangeInput(ev)} id="descripcion" />
+                                            {validDesc === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                                        <input className={`mr-2 mt-2 form-control ${validSt ? "border-success" : validSt === false? "border-danger": ""}`} type="number" placeholder="Stock" onBlur={(ev) => this.validarStock(ev)} onChange={(ev) => this.onChangeInput(ev)} id="stock" />
+                                            {validSt === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                                        <input className={`mr-2 mt-2 form-control ${validP ? "border-success" : validP === false? "border-danger": ""}`} type="number" placeholder="Precio" onBlur={(ev) => this.validarPrecio(ev)} onChange={(ev) => this.onChangeInput(ev)} id="precio" />
+                                            {validP === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                                         <select className=" mr-2 mt-2 custom-select" name="categoria" id="categoria" onChange={(ev) => this.onChangeInput(ev)}>
                                             <option disabled="disabled" selected="selected">Selecciona uno</option>
                                             <option value="Harry_Potter">Harry Potter</option>
@@ -72,11 +103,11 @@ class Nuevo extends Component {
                                             <option value="Star_wars">Star wars</option>
                                             <option value="Dibujos">Dibujos</option>
                                         </select>
-                                        <input className="mr-2 mt-2" type="file" name="archivosubido"  onChange={(ev) => this.onChangeInput(ev)} id="ruta"/>                      
+                                        <input type="file" id="ruta" name="archivosubido" onChange={(ev) => this.onChangeInput(ev)}/>
                                         <div>
-                                            <button className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Dar de alta</button>
+                                            <input className="btn btn-primary float-right mt-2" type="submit" value="Dar de alta" onClick={(ev) => this.onLogearse(ev)} />
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

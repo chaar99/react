@@ -6,7 +6,7 @@ import Prueba from './pages/registro';
 import Login from './pages/login';
 import Nuevo from './pages/nuevoProducto';
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {

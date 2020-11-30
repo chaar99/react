@@ -114,14 +114,14 @@ function RenderProduct(props) {
     const { producto, quantity, increaseQuantity, decreaseQuantity } = props;
     return(
         <div className="cart-content-product">
-            <img src={"./img/"+ producto.ruta} style={{ height: 25, width:50 }} />
-            <div className="cart-content-product-info">
+            <img className="w-25" src={"./img/"+ producto.ruta} alt="imagen"/>
+            <div className="cart-content-product-info w-100 text-white">
                 <div>
                     <h3>{producto.nombre}</h3>
                     <p>{producto.precio}€ / Unidad</p>
                 </div>
                 <div>
-                    <p>cantidad: {quantity}</p>
+                    <p>{quantity} unidade(s).</p>
                     <div>
                         <button onClick={() => increaseQuantity(producto.id_productos)}>+</button>
                         <button onClick={() => decreaseQuantity(producto.id_productos)}>-</button>
@@ -140,7 +140,7 @@ function CartContentFooter(props) {
                 <p>Total: </p>
                 <p>{totalAmount(productsCar, productos)} €</p>
             </div>
-            <button>Tramitar pedido</button>
+            <Button>Tramitar pedido</Button>
         </div>
     )
 }

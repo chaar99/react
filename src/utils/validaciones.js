@@ -45,3 +45,27 @@ export const longitudPass = (ev, valor) => {
     }
     return estado;
 }
+
+export const stock = (ev, valor) => {  
+    ev.stopPropagation();
+    ev.preventDefault();
+    var estado = null;
+    if(/^[1-9]{3}$/.test(valor)) {
+        estado = true;
+    } else {
+        estado = false;
+    }
+    return estado;
+}
+
+export const precio = (ev, valor) => {  
+    ev.stopPropagation();
+    ev.preventDefault();
+    var estado = null;
+    if(/^[1-9][0-9]?{.}[0-9]{0,2}$/.test(valor)) {
+        estado = true;
+    } else {
+        estado = false;
+    }
+    return estado;
+}

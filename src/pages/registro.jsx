@@ -19,10 +19,12 @@ class Prueba extends Component {
             loading: false
         };
     }
+
     comprobarDisabled() {
         const { validNombe, validPass, validCorreo, validApell, validDNI } = this.state;
         return !(validNombe && validPass && validCorreo && validApell && validDNI);
     }
+
     onChangeInput(ev) {
         ev.stopPropagation();
         ev.preventDefault();
@@ -96,7 +98,7 @@ class Prueba extends Component {
                             <div className="row">
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <h3 className="text-center">Registrate</h3>
-                                    <form className="d-flex flex-column">
+                                    <form>
                                         <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" required="required" id="correo" placeholder="Email" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
                                             {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                                         <input className={`mr-2 mt-2 form-control ${validNombe ? "border-success" : validNombe === false? "border-danger": ""}`} type="text" placeholder="Name" id="nombre" onBlur={(ev) => this.validarTexto(ev, "validNombe")} onChange={(ev) => this.onChangeInput(ev)} />
