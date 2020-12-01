@@ -76,8 +76,6 @@ class Login extends Component {
                     {!loading && 
                         <div className="d-flex flex-column my-5">
                             <div className="row">
-                            <div className="row">
-                            </div>
                                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                                     <h3 className="text-center">Inicia sesión</h3>
                                     <form className="d-flex flex-column">

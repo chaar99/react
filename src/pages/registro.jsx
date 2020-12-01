@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Link } from "react-router-dom";
 import { email, compruebaText, compruebaDNI, longitudPass } from "../utils/validaciones";
 
-class Prueba extends Component {
+class Registro extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -126,4 +126,4 @@ class Prueba extends Component {
     }
 };
 
-export default Prueba;
+export default Registro;
