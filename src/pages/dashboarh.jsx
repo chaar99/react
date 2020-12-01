@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Lista from '../components/Lista/lista';
+import Load from '../components/Load/load';
 // import Filtro from '../components/Filtro/filtro';
 
 class Dashboard extends Component {
@@ -14,7 +15,7 @@ class Dashboard extends Component {
         const { productos, loading, addProductCart } = this.props;
         return (
             <div>
-                {loading && <p>Estoy cargando.....</p>}
+                {loading && <Load />}
                 {!loading && 
                     <div className="d-flex flex-column">
                         {/* <Filtro aplicarFiltros={aplicarFiltros} /> */}

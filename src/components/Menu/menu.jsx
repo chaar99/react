@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Navbar, Nav } from "react-bootstrap";
 import Cart from '../cart/cart';
+import Perfil from '../Perfil/perfil';
 import Logo from "../Logo/logo";
 
 import './menu.css';
@@ -17,6 +18,7 @@ class Menu extends Component {
             <Navbar bg="dark" variant="dark" className="top-menu">
                 <BrandNav />
                 <MenuNav />
+                <Perfil />
                 <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} getProductsCar={getProductsCar} />
             </Navbar>
         );
