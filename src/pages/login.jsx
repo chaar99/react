@@ -10,7 +10,8 @@ class Login extends Component {
             correo: null,
             persona: {},
             validCorreo: null,
-            validPass: null
+            validPass: null,
+            error: null,
         };
     }
 
@@ -43,14 +44,27 @@ class Login extends Component {
                 method: 'POST',
                 body: JSON.stringify(objeto),
             }
-        ).then(res => res.json())
-        .then(res => {
-            debugger;
+        ).then(res => {
+            if (res.status === 200) {
+                //creas la cookie en el localstorage o donde quieras
+                return Promise.resolve(res)
+            }
+        })
+        .then(res => res.json())
+        .then(() => {
             this.setState({
-                persona: res,
+                error: null,
                 loading: false
             });
-        });
+        })
+        .catch((err) => {
+            debugger;
+            this.setState({
+                error: "error de la ostia que te pego",
+                loading: false
+            });
+        });;
+       
     }
 
     validarEmail(ev) {
@@ -68,7 +82,7 @@ class Login extends Component {
     }
 
     render() {
-        const { persona, loading, validCorreo,validPass } = this.state;
+        const { error, loading, validCorreo,validPass } = this.state;
         return (
             <div className="row my-5">
                 <div className="col-12">
@@ -96,6 +110,7 @@ class Login extends Component {
                             </div>
                         </div>
                     }
+                    {error && <h1>{error}</h1>}
                 </div>
             </div>
         );

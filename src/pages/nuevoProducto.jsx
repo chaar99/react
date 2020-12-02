@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { compruebaText, stock, precio } from "../utils/validaciones";
+import { withRouter } from 'react-router-dom';
 
 class Nuevo extends Component {
     constructor(props) {
@@ -36,7 +37,6 @@ class Nuevo extends Component {
 
     validarStock(ev) {
         var valor = (ev.target.value);
-        alert(typeof(valor))
         this.setState({
             validSt: stock(ev, valor)
         })
@@ -47,6 +47,12 @@ class Nuevo extends Component {
         this.setState({
             validP: precio(ev, valor)
         })
+    }
+
+    navegarDetalle() {
+        this.props.history.push({
+            pathname:'/nuevoProducto'
+        });
     }
 
     onLogearse(ev) {
@@ -69,7 +75,12 @@ class Nuevo extends Component {
                 method: 'POST', 
                 body: JSON.stringify(objeto), 
             }
-        ).then(
+        ).then(res => {
+            if (res.status === 200) {
+                alert("registrado");
+                this.navegarDetalle();
+            }
+        }).then(
             this.setState({
                 loading: false
             })
@@ -118,4 +129,4 @@ class Nuevo extends Component {
     }
 };
 
-export default Nuevo;
+export default withRouter(Nuevo);

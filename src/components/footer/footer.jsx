@@ -13,7 +13,7 @@ class Footer extends Component {
 
     render() {
         return (
-            <footer className="d-flex flex-column bg-dark" >
+            <footer className="d-flex flex-column bg-dark" style={{position: 'reglative', bottom: '0', left: '0', width: '100%', height: '25%'}}>
                 <div className="d-flex justify-content-center ">
                     <div className="p-2 m-2">
                         <div className="">
