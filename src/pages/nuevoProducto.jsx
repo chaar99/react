@@ -6,17 +6,12 @@ class Nuevo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nombre: null,
-            validNombe: null,
-            stock: null,
-            validSt: null,
-            descripcion: null,  
-            validDesc: null,
-            precio: null,
-            validP: null,
+            nombre: null, validNombe: null, 
+            stock: null, validSt: null, 
+            descripcion: null, validDesc: null,
+            precio: null, validP: null,
             ruta: null,
-            categoria: null,
-            validCa: null
+            categoria: null, validCa: null
         };
     }
 
@@ -49,7 +44,7 @@ class Nuevo extends Component {
         })
     }
 
-    navegarDetalle() {
+    navegarNproducto() {
         this.props.history.push({
             pathname:'/nuevoProducto'
         });
@@ -78,7 +73,8 @@ class Nuevo extends Component {
         ).then(res => {
             if (res.status === 200) {
                 alert("registrado");
-                this.navegarDetalle();
+                debugger;
+                this.navegarNproducto();
             }
         }).then(
             this.setState({

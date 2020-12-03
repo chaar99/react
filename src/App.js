@@ -6,7 +6,7 @@ import Registro from './pages/registro';
 import Login from './pages/login';
 import Nuevo from './pages/nuevoProducto';
 import Detalle from './pages/detalle';
-import Tramite from '../src/components/Tramite/tramite';
+import Tramitar from './pages/tramitar';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -79,7 +79,7 @@ class App extends Component {
               <Route exact path="/registro" component={Registro} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/nuevoProducto" component={Nuevo} />
-              <Route exact path="/tramite" component={Tramite} />
+              <Route exact path="/tramite" component={Tramitar} />
               <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />} />
           </Router>
       <Footer />

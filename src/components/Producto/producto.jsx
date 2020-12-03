@@ -18,6 +18,7 @@ class Producto extends Component {
             }
         });
     }
+    
     render() {
         const { addProductCart, elemento } = this.props;
         return (            
