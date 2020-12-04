@@ -123,3 +123,39 @@ export const telefono = (ev, valor) => {
     }
     return estado;
 }
+
+export const titular = (ev, valor) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    var estado = null;
+    if(/^[a-zA-ZÀ-ÿ" "]+$/.test(valor)){
+        estado = true;
+    } else {
+        estado = false;
+    }
+    return estado;
+}
+
+export const numTarjet = (ev, valor ) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    var estado = null;
+    if(/^[0-9]{16}$/.test(valor)){
+        estado = true;
+    } else {
+        estado = false;
+    }
+    return estado;
+}
+
+export const validarcvv = (ev, valor) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    var estado = null;
+    if(/^[0-9]{3}$/.test(valor)){
+        estado = true;
+    } else {
+        estado = false;
+    }
+    return estado;
+}
