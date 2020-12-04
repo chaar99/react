@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Link } from "react-router-dom";
 import { email, longitudPass } from '../utils/validaciones';
+import Load from '../components/Load/load';
 
 class Login extends Component {
     constructor(props) {
@@ -86,7 +87,7 @@ class Login extends Component {
         return (
             <div className="row my-5">
                 <div className="col-12">
-                    {loading && <p>Estoy cargando.....</p>}
+                    {loading && <Load />}
                     {!loading && 
                         <div className="d-flex flex-column my-5">
                             <div className="row">

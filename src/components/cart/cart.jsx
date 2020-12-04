@@ -58,13 +58,15 @@ class Cart extends Component {
     navegarTramite(ev) {
         ev.stopPropagation();
         ev.preventDefault();
-        const { elemento } = this.props;
-        this.props.history.push({
-            pathname:'/tramite',
-            state: {
-                elemento
-            }
-        });
+        const { productsCar } = this.props;
+        if( productsCar.length !== 0){
+            this.props.history.push({
+                pathname:'/tramite',
+                state: {
+                    productsCar
+                }
+            });
+        }
     }
 
     render() {

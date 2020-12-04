@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import Menu from './components/Menu/menu';
 import Footer from './components/Footer/footer';
-import Cart from './components/cart/cart';
 import Dashboard from './pages/dashboarh';
 import Registro from './pages/registro';
 import Login from './pages/login';
@@ -59,22 +58,22 @@ class App extends Component {
     })
   }
 
-  prueba(valores) {
-    debugger;
-  }
+  // prueba(valores) {
+  //   debugger;
+  // }
 
   render() {
     const { productos, loading, productsCar } = this.state;
     return (
       <div>
-        <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
           <Router>
+              <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
               <Route exact path="/" component={()=>
                 <Dashboard
                   productos={productos}
                   loading={loading}
                   addProductCart={(id, nombre)=> this.addProductCart(id, nombre)}
-                  aplicarFiltros={(valores)=> this.prueba(valores)}
+                  // aplicarFiltros={(valores)=> this.prueba(valores)}
                 />}
               />
               <Route exact path="/registro" component={Registro} />
@@ -82,7 +81,6 @@ class App extends Component {
               <Route exact path="/nuevoProducto" component={Nuevo} />
               <Route exact path="/tramite" component={Tramitar} />
               <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />} />
-              <Route exact path="/cart" component={Cart} />
           </Router>
       <Footer />
      </div>
