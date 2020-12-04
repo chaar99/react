@@ -3,7 +3,7 @@ import {ReactComponent as Camion} from "../../assets/camion.svg";
 import {ReactComponent as Usuario} from "../../assets/usuario-de-perfil.svg";
 import {ReactComponent as Tarjeta} from "../../assets/tarjeta-de-credito.svg";
 
-import { compruebaText, compruebaDNI, telefono, cod_postal, provincias, compruebaCalle, titular, numTarjet, validarcvv } from "../../utils/validaciones";
+import { compruebaText, compruebaDNI, telefono, cod_postal, provincias, compruebaCalle, titular, numTarjet, validarcvv, validarFech } from "../../utils/validaciones";
 import './tramite.css';
 class Tramite extends Component {
     constructor(props) {
@@ -105,6 +105,13 @@ class Tramite extends Component {
       })
     }
 
+    validarFecha(ev) {
+      var valor = ev.target.value;
+      this.setState({
+        validaDate: validarFech(ev, valor) 
+      }) 
+    }
+
     renderFirstColum() {
       const { validNombe, validaProv, validApe, validDni, validaTelf, validaCalle, validaDet, validaCiu, validCodP } = this.state;
         return (
@@ -191,12 +198,14 @@ class Tramite extends Component {
             <h4 className="w-100 p-3" style={{ borderBottom: '1px solid #4f5256'}}>Método de pago</h4>
           </div>
           <form className="d-flex flex-column">
+            <p>{validaDate}</p>
             <input type="text" placeholder="Titular de la tarjeta" id="tit_tarjeta" className={`mr-2 mt-2 form-control ${validaTit ? "border-success" : validaTit === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validaTitilar(ev)}/>
               {validaTit === false && <small className="text-danger">Lo sentimos. Formato incorrecto. Revise el campo</small>}
             <input type="text" placeholder="Nº de la tarjeta" id="n_tarjeta" className={`mr-2 mt-2 form-control ${validaNum ? "border-success" : validaNum === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validarnumTarjet(ev)}/>
               {validaNum === false && <small className="text-danger">Lo sentimos. Formato incorrecto. Revise el campo</small>}
             <label>Fecha de expiración</label>
-            <input type="month" id="date"  className={`mr-2 mt-2 form-control ${validaDate ? "border-success" : validaDate === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)}/>
+            <input type="month" id="date"  className={`mr-2 mt-2 form-control ${validaDate ? "border-success" : validaDate === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validarFecha(ev)}/>
+              {validaDate === false && <small className="text-danger">Lo sentimos. Formato incorrecto. Revise el campo</small>}
             <input type="number" placeholder="CVV" id="cvv" className={`mr-2 mt-2 form-control ${validaCVV ? "border-success" : validaCVV === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validarCVV(ev)}/>
               {validaCVV === false && <small className="text-danger">Lo sentimos. Formato incorrecto. Revise el campo</small>}
           </form>

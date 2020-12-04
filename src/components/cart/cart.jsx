@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { Button } from "react-bootstrap";
+
+import { withRouter } from 'react-router-dom';
 import {ReactComponent as CartEmpty} from "../../assets/cart-empty.svg";
 import {ReactComponent as Close} from "../../assets/close.svg";
 import {ReactComponent as Vaciar} from "../../assets/garbage.svg";
@@ -53,6 +55,18 @@ class Cart extends Component {
         return cartOpen ? 400 : 0;
     }
 
+    navegarTramite(ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        const { elemento } = this.props;
+        this.props.history.push({
+            pathname:'/tramite',
+            state: {
+                elemento
+            }
+        });
+    }
+
     render() {
         const { productos, productsCar, onEmptyCart } = this.props;
         const allProductsId = removeArrayDuplicates(productsCar);
@@ -69,7 +83,7 @@ class Cart extends Component {
                                 decreaseQuantity={(id) => this.decreaseQuantity(id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
                         ))}
                     </div>
-                    <CartContentFooter productos={productos} productsCar={productsCar} />
+                    <CartContentFooter productos={productos} productsCar={productsCar} navegarTramite={(ev) => this.navegarTramite(ev)}/>
                 </div>
             </div>
         );
@@ -133,15 +147,15 @@ function RenderProduct(props) {
 }
 
 function CartContentFooter(props) {
-    const { productos, productsCar } = props;
+    const { productos, productsCar, navegarTramite } = props;
     return(
         <div className="cart-content-footer">
             <div className="primer">
                 <p>Total: </p>
                 <p>{totalAmount(productsCar, productos)} €</p>
             </div>
-            <Button>Tramitar pedido</Button>
+            <Button onClick={(ev) => navegarTramite(ev)}>Tramitar pedido</Button>
         </div>
     )
 }
-export default Cart;
+export default withRouter(Cart);

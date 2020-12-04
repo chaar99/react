@@ -159,3 +159,24 @@ export const validarcvv = (ev, valor) => {
     }
     return estado;
 }
+
+export const validarFech = (ev, valor) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    var estado = null;
+    var valor = valor.split("-");
+    var fecha = new Date();
+    if(valor[0] > fecha.getFullYear()){
+        estado = true;
+    }else if( valor[0] < fecha.getFullYear()){
+        estado = false;
+    }else{
+        if(valor[1] >= (fecha.getMonth() + 1)){
+            estado = true;
+        }else {
+            estado = false;
+        }
+    }
+    
+    return estado;
+}

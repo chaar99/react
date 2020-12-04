@@ -10,7 +10,7 @@ class Producto extends Component {
     navegarDetalle(ev) {
         ev.stopPropagation();
         ev.preventDefault();
-        const { elemento} = this.props;
+        const { elemento } = this.props;
         this.props.history.push({
             pathname:'/detalle',
             state: {

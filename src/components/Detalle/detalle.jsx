@@ -15,17 +15,15 @@ class DetalleP extends Component {
                 </div>
                 <div className="col-12 col-md-3 ml-2">
                     <h3 className="text-center">{elemento.nombre}</h3>
-                    
-                        <p className="text-center small">{elemento.precio}€ / Unidad</p>
-                        <p className="text-center small">{elemento.descripcion}</p>
-                        <button className="btn btn-primary w-100 position-absolute p-25" style={{left: '0', bottom:'0'}}
-                            onClick={(ev) => {
-                                ev.stopPropagation();
-                                ev.preventDefault();
-                                addProductCart(elemento.id_productos, elemento.nombre);
-                            }}
-                        >Añadir al carrito</button>
-                    
+                    <p className="text-center small">{elemento.precio}€ / Unidad</p>
+                    <p className="text-center small">{elemento.descripcion}</p>
+                    <button className="btn btn-primary w-100 position-absolute p-25" style={{left: '0', bottom:'0'}}
+                        onClick={(ev) => {
+                            ev.stopPropagation();
+                            ev.preventDefault();
+                            addProductCart(elemento.id_productos, elemento.nombre);
+                        }}
+                    >Añadir al carrito</button>
                 </div>
                 <div className="col-md-3"></div>
             </div>  

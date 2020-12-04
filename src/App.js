@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Menu from './components/Menu/menu';
 import Footer from './components/Footer/footer';
+import Cart from './components/cart/cart';
 import Dashboard from './pages/dashboarh';
 import Registro from './pages/registro';
 import Login from './pages/login';
@@ -81,6 +82,7 @@ class App extends Component {
               <Route exact path="/nuevoProducto" component={Nuevo} />
               <Route exact path="/tramite" component={Tramitar} />
               <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />} />
+              <Route exact path="/cart" component={Cart} />
           </Router>
       <Footer />
      </div>
