@@ -18,7 +18,7 @@ class Tramite extends Component {
           ciudad: null, validaCiu: null,
           prov: null, validaProv: null,
           codP: null, validCodP: null,
-          envio: null, validaEnvio: false,
+          envio: 0, validaEnvio: false,
           tit_tarjeta: null, validaTit: null,
           num_tarjeta: null, validaNum: null,
           date: null, validaDate: null,
@@ -212,15 +212,33 @@ class Tramite extends Component {
         </div>
       );
     }
+    renderDetail() {
+      const {total, productsCar} = this.props;
+      const { envio } = this.state;
+      var suma = parseInt(total) + parseFloat(envio);
+      return(
+        <div className=" col-12 border border-info rounded w-75 m-auto">
+          <h4 className="w-100 p-3">Resumen</h4>
+          <p>Precio por {productsCar.length} Funkos: {total} €.</p>
+          <p>Precio por gasto de envío {envio}: €.</p>
+          <p>Total: {suma} €.</p>
+        </div>
+      )
+    }
     render() {
       return (
-        <div className="tramite row my-5">
-          <div className="col-12 col-sm-1"></div>
-          {this.renderFirstColum()}
-          {this.renderSecondColum()}
-          {this.renderThirdColum()}
-          <div className="col-12 col-sm-1"> </div>
-        </div>
+        <>
+          <div className="tramite row my-5">
+            <div className="col-12 col-sm-1"></div>
+            {this.renderFirstColum()}
+            {this.renderSecondColum()}
+            {this.renderThirdColum()}
+            <div className="col-12 col-sm-1"> </div>
+          </div>
+          <div className="row">
+            {this.renderDetail()}
+          </div>
+        </>
       );
     }
 };

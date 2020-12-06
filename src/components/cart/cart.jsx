@@ -55,7 +55,7 @@ class Cart extends Component {
         return cartOpen ? 400 : 0;
     }
 
-    navegarTramite(ev) {
+    navegarTramite(ev, total) {
         ev.stopPropagation();
         ev.preventDefault();
         const { productsCar } = this.props;
@@ -63,7 +63,8 @@ class Cart extends Component {
             this.props.history.push({
                 pathname:'/tramite',
                 state: {
-                    productsCar
+                    productsCar,
+                    total
                 }
             });
         }
@@ -85,7 +86,7 @@ class Cart extends Component {
                                 decreaseQuantity={(id) => this.decreaseQuantity(id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
                         ))}
                     </div>
-                    <CartContentFooter productos={productos} productsCar={productsCar} navegarTramite={(ev) => this.navegarTramite(ev)}/>
+                    <CartContentFooter productos={productos} productsCar={productsCar} navegarTramite={(ev, total) => this.navegarTramite(ev, total)}/>
                 </div>
             </div>
         );
@@ -156,7 +157,7 @@ function CartContentFooter(props) {
                 <p>Total: </p>
                 <p>{totalAmount(productsCar, productos)} €</p>
             </div>
-            <Button onClick={(ev) => navegarTramite(ev)}>Tramitar pedido</Button>
+            <Button onClick={(ev, total) => navegarTramite(ev, totalAmount(productsCar, productos))}>Tramitar pedido</Button>
         </div>
     )
 }

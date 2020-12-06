@@ -17,7 +17,7 @@ class Tramitar extends Component {
         }
         return (
             <div>
-                <Tramite />
+                <Tramite total={location.state.total} productsCar={location.state.productsCar}/>
             </div>
         );
     }
