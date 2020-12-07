@@ -62,7 +62,7 @@ export const stock = (ev, valor) => {
     ev.stopPropagation();
     ev.preventDefault();
     var estado = null;
-    if(/^[1-9]{3}$/.test(valor)) {
+    if (/^[1-9][0-9]{0,2}$/.test(valor)) {
         estado = true;
     } else {
         estado = false;
@@ -74,7 +74,7 @@ export const precio = (ev, valor) => {
     ev.stopPropagation();
     ev.preventDefault();
     var estado = null;
-    if(/^[1-9][0-9]?{.}[0-9]{0,2}$/.test(valor)) {
+    if (/^[1-9][0-9]?(.[0-9])*$/.test(valor)) {
         estado = true;
     } else {
         estado = false;

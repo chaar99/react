@@ -38,7 +38,7 @@ class Nuevo extends Component {
     }
 
     validarPrecio(ev) {
-        var valor = parseFloat(ev.target.value);
+        var valor = ev.target.value;
         this.setState({
             validP: precio(ev, valor)
         })
@@ -46,7 +46,7 @@ class Nuevo extends Component {
 
     navegarNproducto() {
         this.props.history.push({
-            pathname:'/nuevoProducto'
+            pathname: '/nuevoProducto'
         });
     }
 
