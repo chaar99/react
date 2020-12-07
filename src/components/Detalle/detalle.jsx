@@ -5,8 +5,27 @@ class DetalleP extends Component {
         super(props);
     }
 
+    borrar(ev, id) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        const objeto = {
+            id: id
+        }
+        fetch("http://localhost/aplicacion/proyectoDaw/borrarProducto.php",
+            {
+                method: 'POST',
+                body: JSON.stringify(objeto),
+            }
+        ).then(res => {
+            if (res.status === 200) {
+                alert("borrado");
+            }
+        });
+    }
+
     render() {
         const { addProductCart, elemento } = this.props;
+        const ident = elemento.id_productos;
         return (            
             <div className="row my-5 h-5">
                 <div className="col-md-3"></div>
@@ -24,6 +43,8 @@ class DetalleP extends Component {
                             addProductCart(elemento.id_productos, elemento.nombre);
                         }}
                     >Añadir al carrito</button>
+                    <button className="btn btn-primary w-100 position-absolute" onClick={(ev, id) => this.borrar(ev, ident)}>
+                        Borrar producto</button>
                 </div>
                 <div className="col-md-3"></div>
             </div>  

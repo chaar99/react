@@ -46,7 +46,7 @@ class Nuevo extends Component {
 
     navegarNproducto() {
         this.props.history.push({
-            pathname: '/nuevoProducto'
+            pathname: '/'
         });
     }
 

@@ -4,10 +4,9 @@
     "\\src",
     "\\src\\components",
     "\\src\\components\\cart",
-    "\\src\\components\\footer",
     "\\src\\components\\Tramite",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\src\\pages\\detalle.jsx",
   "PreviewInSolutionExplorer": false
 }
