@@ -22,7 +22,7 @@ class Producto extends Component {
     render() {
         const { addProductCart, elemento } = this.props;
         return (            
-            <div className="col-12 col-sm-3 p-3">
+            <div className="col-12 col-md-4 col-lg-3 p-3">
                 <div onClick={(ev) => this.navegarDetalle(ev)}>
                     <p className="text-center">{elemento.id_productos}</p>
                     <img className="mx-auto d-block" style={{ height: 175, width:200 }} src={"./img/"+ elemento.ruta} alt={elemento.nombre}/>

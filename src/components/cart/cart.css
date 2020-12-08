@@ -59,11 +59,13 @@
     height: calc(100vh - 76px - 19px);
     overflow-y: scroll;
 }
+.cart-content-products .cart-content-product {
+    border-bottom: 1px solid #4f5256;
+}
 .cart-content-product {
     display: flex;
     align-items: center;
     padding:  15px;
-    border-bottom: 1px solid #4f5256;
 }
 .cart-content-product img {
     margin-right: 10px;
@@ -74,7 +76,7 @@
 .cart-content-product-info p {
     font-size: 16px;
 }
-.cart-content-product-info:first-of-type {
+.cart-content-products .cart-content-product-info:first-of-type {
     border-bottom: 1px solid #4f5256;
 }
 .cart-content-product-info:last-of-type {

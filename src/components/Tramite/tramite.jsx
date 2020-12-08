@@ -5,6 +5,9 @@ import {ReactComponent as Tarjeta} from "../../assets/tarjeta-de-credito.svg";
 
 import { compruebaText, compruebaDNI, telefono, cod_postal, provincias, compruebaCalle, titular, numTarjet, validarcvv, validarFech } from "../../utils/validaciones";
 import './tramite.css';
+import { RenderProduct } from "../cart/cart";
+import { productsDetail } from "../../utils/arrayFunciones";
+
 class Tramite extends Component {
     constructor(props) {
         super(props);
@@ -43,73 +46,69 @@ class Tramite extends Component {
       });
     }
     validarTexto(ev, valorState) {
-      var valor = ev.target.value;
       this.setState({
-          [valorState]: compruebaText(ev, valor)
+          [valorState]: compruebaText(ev, ev.target.value)
       })
     }
 
     validarTel(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validaTelf: telefono(ev, valor)
+        validaTelf: telefono(ev, ev.target.value)
       })
     }
 
     validarProv(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validaProv: provincias(ev, valor)
+        validaProv: provincias(ev, ev.target.value)
       })
     }
 
     validaDNI(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validDni: compruebaDNI(ev, valor)
+        validDni: compruebaDNI(ev, ev.target.value)
       })
     }
 
     validarCalle(ev, valorState) {
-      var valor = ev.target.value;
       this.setState({
-        [valorState]: compruebaCalle(ev, valor)
+        [valorState]: compruebaCalle(ev, ev.target.value)
       })
     }
 
     validarCod(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validCodP: cod_postal(ev, valor)
+        validCodP: cod_postal(ev, ev.target.value)
       })
     }
 
     validaTitilar(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validaTit: titular(ev, valor)
+        validaTit: titular(ev, ev.target.value)
       })
     }
 
     validarnumTarjet(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validaNum: numTarjet(ev, valor)
+        validaNum: numTarjet(ev, ev.target.value)
       })
     }
 
     validarCVV(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validaCVV: validarcvv(ev, valor)
+        validaCVV: validarcvv(ev, ev.target.value)
       })
     }
 
     validarFecha(ev) {
-      var valor = ev.target.value;
       this.setState({
-        validaDate: validarFech(ev, valor) 
+        validaDate: validarFech(ev, ev.target.value) 
       }) 
+    }
+
+    aceptar(ev) {
+      ev.stopPropagation();
+      ev.preventDefault();
+      // función para registar el producto
     }
 
     renderFirstColum() {
@@ -212,20 +211,36 @@ class Tramite extends Component {
         </div>
       );
     }
-    renderDetail() {
+    renderDetail(productosDetail) {
       const {total, productsCar} = this.props;
       const { envio } = this.state;
       var suma = parseInt(total) + parseFloat(envio);
       return(
-        <div className=" col-12 border border-info rounded w-75 m-auto">
+        <div className=" col-12">
           <h4 className="w-100 p-3">Resumen</h4>
-          <p>Precio por {productsCar.length} Funkos: {total} €.</p>
-          <p>Precio por gasto de envío {envio}: €.</p>
-          <p>Total: {suma} €.</p>
+          <div className="row">
+            {productosDetail.map((producto, index) =>
+              <div className="col-12 col-md-4 col-sm-6">
+                <RenderProduct
+                  producto={producto}
+                  key={index}
+                  quantity={producto.quantity}
+                />
+              </div>
+            )}
+          </div>
+          <div className="text-right pr-3 pb-2">
+            <p>Precio por {productsCar.length} Funkos: {total} €</p>
+            <p>Precio por gasto de envío: {envio} €</p>
+            <p>Total: {suma} €</p>
+            <button className="btn btn-primary" onClick={(ev) => this.aceptar(ev)}>Aceptar</button>
+          </div>
         </div>
       )
     }
     render() {
+      const { productos, productsCar } = this.props;
+      const productosDetail = productsDetail(productos, productsCar);
       return (
         <>
           <div className="tramite row my-5">
@@ -236,7 +251,7 @@ class Tramite extends Component {
             <div className="col-12 col-sm-1"> </div>
           </div>
           <div className="row">
-            {this.renderDetail()}
+            {this.renderDetail(productosDetail)}
           </div>
         </>
       );

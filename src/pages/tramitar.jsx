@@ -8,7 +8,7 @@ class Tramitar extends Component {
     }
 
     render() {
-        const { location } = this.props;
+        const { location, productos } = this.props;
         if(!location.state) {
             this.props.history.push({
                 pathname:'/'
@@ -17,7 +17,7 @@ class Tramitar extends Component {
         }
         return (
             <div>
-                <Tramite total={location.state.total} productsCar={location.state.productsCar}/>
+                <Tramite total={location.state.total} productsCar={location.state.productsCar} productos={productos} />
             </div>
         );
     }

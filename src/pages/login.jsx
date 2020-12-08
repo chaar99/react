@@ -9,10 +9,11 @@ class Login extends Component {
         this.state = {
             password: null,
             correo: null,
-            persona: {},
+            persona: [],
             validCorreo: null,
             validPass: null,
             error: null,
+            loading: false,
         };
     }
 
@@ -29,6 +30,12 @@ class Login extends Component {
         });
     }
     
+    navegarIndex() {
+      this.props.onAddProducto();
+      this.props.history.push({
+        pathname: '/'
+      });
+    }
     onLogearse(ev) {
         this.setState({
             loading: true
@@ -40,82 +47,79 @@ class Login extends Component {
             password : password,
             correo : correo
         }
-        fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php",
-            {
-                method: 'POST',
-                body: JSON.stringify(objeto),
+        fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php", {
+              method: 'POST',
+              body: JSON.stringify(objeto),
             }
         ).then(res => {
             if (res.status === 200) {
                 //creas la cookie en el localstorage o donde quieras
-                return Promise.resolve(res)
+                this.setState({
+                  loading: false,
+                  error: null
+                });
+                localStorage.setItem("registrado", true);
+                //this.navegarIndex();
+                return Promise.resolve(res);
             }
         })
         .then(res => res.json())
-        .then(() => {
-            this.setState({
-                error: null,
-                loading: false
-            });
-        })
         .catch((err) => {
-            debugger;
             this.setState({
-                error: "error de la ostia que te pego",
+                error: "Correo o contraseña equivocados.",
                 loading: false
             });
+            localStorage.setItem("registrado", false);
         });;
        
     }
 
     validarEmail(ev) {
-        var valor = ev.target.value;
         this.setState({
-            validCorreo: email(ev, valor)
+            validCorreo: email(ev, ev.target.value)
         });
     }
 
     validarPass(ev) {
-        var valor = ev.target.value;
         this.setState({
-            validPass: longitudPass(ev, valor)
+            validPass: longitudPass(ev, ev.target.value)
         })
     }
 
-    render() {
-        const { error, loading, validCorreo,validPass } = this.state;
-        return (
-            <div className="row my-5">
-                <div className="col-12">
-                    {loading && <Load />}
-                    {!loading && 
-                        <div className="d-flex flex-column my-5">
-                            <div className="row">
-                                <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
-                                    <h3 className="text-center">Inicia sesión</h3>
-                                    <form className="d-flex flex-column">
-                                        <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" placeholder="Email" id="correo" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
-                                            {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
-                                        <input className={`mr-2 mt-2 form-control ${validPass ? "border-success" : validPass === false? "border-danger": ""}`} type="password" placeholder="Password" id="password" onBlur={(ev) => this.validarPass(ev)} onChange={(ev) => this.onChangeInput(ev)} />
-                                            {/* {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>} */}
-                                        <div>
-                                            <button className="btn btn-primary float-right mt-2" type="submit"  onClick={(ev) => this.onLogearse(ev)}>Inicia sesión</button>
-                                        </div>
-                                    </form>
-                                </div>
+  render() {
+    const { error, loading, validCorreo,validPass } = this.state;
+    return (
+        <div className="row my-5">
+            <div className="col-12">
+                {loading && <Load />}
+                {!loading && 
+                  <div className="d-flex flex-column my-5">
+                    <div className="row">
+                      <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
+                        <h3 className="text-center">Inicia sesión</h3>
+                        <form className="d-flex flex-column">
+                            <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" placeholder="Email" id="correo" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
+                              {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                            <input className={`mr-2 mt-2 form-control ${validPass ? "border-success" : validPass === false? "border-danger": ""}`} type="password" placeholder="Password" id="password" onBlur={(ev) => this.validarPass(ev)} onChange={(ev) => this.onChangeInput(ev)} />
+                              {/* {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>} */}
+                            <div>
+                              <button className="btn btn-primary float-right mt-2" type="submit"  onClick={(ev) => this.onLogearse(ev)}>Inicia sesión</button>
                             </div>
-                            <div className="text-center mt-3">
-                                    <p>¿No tienes una cuenta?
-                                        <Link className="ml-2" to="/registro">Registrate</Link>
-                                    </p>    
-                            </div>
-                        </div>
-                    }
-                    {error && <h1>{error}</h1>}
-                </div>
+                            {error && <p className="text-danger">{error}</p>}
+                        </form>
+                      </div>
+                    </div>
+                    <div className="text-center mt-3">
+                      <p>¿No tienes una cuenta?
+                        <Link className="ml-2" to="/registro">Registrate</Link>
+                      </p>    
+                    </div>
+                  </div>
+                }
             </div>
-        );
-    }
+        </div>
+    );
+  }
 };
 
 export default Login;

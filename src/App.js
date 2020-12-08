@@ -21,8 +21,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.obtenerProductos();
+  }
+
+  obtenerProductos() {
     this.setState({
-        loading: true
+      loading: true
     });
     fetch("http://localhost/aplicacion/proyectoDaw/index.php").then(res => res.json())
     .then(res => {
@@ -65,25 +69,28 @@ class App extends Component {
   render() {
     const { productos, loading, productsCar } = this.state;
     return (
-      <div>
-          <Router>
-              <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
-              <Route exact path="/" component={()=>
-                <Dashboard
-                  productos={productos}
-                  loading={loading}
-                  addProductCart={(id, nombre)=> this.addProductCart(id, nombre)}
-                  // aplicarFiltros={(valores)=> this.prueba(valores)}
-                />}
-              />
-              <Route exact path="/registro" component={Registro} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/nuevoProducto" component={Nuevo} />
-              <Route exact path="/tramite" component={Tramitar} />
-              <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />} />
-          </Router>
-      <Footer />
-     </div>
+      <Router>
+          <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
+          <Route exact path="/" component={()=>
+            <Dashboard
+              productos={productos}
+              loading={loading}
+              addProductCart={(id, nombre)=> this.addProductCart(id, nombre)}
+              // aplicarFiltros={(valores)=> this.prueba(valores)}
+            />}
+          />
+          <Route exact path="/registro" component={Registro} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/nuevoProducto" component={() => 
+            <Nuevo onAddProducto={() => this.obtenerProductos()} />} />
+          <Route exact path="/tramite" component={() =>
+            <Tramitar
+              productos={productos}
+            />}
+          />
+          <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />} />
+          <Footer />
+      </Router>
     );
   }
 }

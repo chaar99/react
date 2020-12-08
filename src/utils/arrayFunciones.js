@@ -31,3 +31,18 @@ export const totalAmount = (productsCar, productos) => {
     }
     return total;
 }
+
+export const productsDetail = (products, productIds) => {
+    let productos = [];
+    const ids = removeArrayDuplicates(productIds);
+    for(let i = 0; i< products.length; i++) {
+        for(let j = 0; j< ids.length; j++) {
+            if(products[i].id_productos === ids[j]){
+                const quantity = countDuplicatesItemArray(products[i].id_productos, productIds);
+                products[i].quantity = quantity;
+                productos.push(products[i]);
+            }
+        }
+    }
+    return productos;
+};
