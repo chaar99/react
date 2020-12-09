@@ -6,42 +6,42 @@ import Logo from "../Logo/logo";
 
 import './menu.css';
 class Menu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
 
-    render() {
-        const { productos, productsCar, onEmptyCart, getProductsCar } = this.props;
-        return (
-            <Navbar bg="dark" variant="dark" className="top-menu">
-                <BrandNav />
-                <MenuNav />
-                <Perfil />
-                <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} getProductsCar={getProductsCar} />
-            </Navbar>
-        );
-    }
+  render() {
+    const { productos, productsCar, onEmptyCart, getProductsCar } = this.props;
+    return (
+      <Navbar bg="dark" variant="dark" className="top-menu">
+        <BrandNav />
+        <MenuNav />
+        <Perfil />
+        <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} getProductsCar={getProductsCar} />
+      </Navbar>
+    );
+  }
 };
 
 function BrandNav() {
-    return (
-        <Navbar.Brand>
-           <Logo />
-        </Navbar.Brand>
-    );
+  return (
+    <Navbar.Brand>
+      <Logo />
+    </Navbar.Brand>
+  );
 }
 
 function MenuNav() {
-    return (
-        <Nav className="mr-auto">
-            <Nav.Link href="login">Inicia sesion</Nav.Link>
-            <Nav.Link href="registro">Registrate</Nav.Link>
-            <Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>
-            <Nav.Link href="/">Inicio</Nav.Link>
-        </Nav>
-    )
+  return (
+    <Nav className="mr-auto">
+      <Nav.Link href="login">Inicia sesion</Nav.Link>
+      <Nav.Link href="registro">Registrate</Nav.Link>
+      <Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>
+      <Nav.Link href="/">Inicio</Nav.Link>
+    </Nav>
+  )
 }
 
 export default Menu;

@@ -12,7 +12,8 @@ class Nuevo extends Component {
       descripcion: null, validDesc: null,
       precio: null, validP: null,
       ruta: null,
-      categoria: null, validCa: null
+      categoria: null, validCa: null,
+      error: null
     };
   }
 
@@ -42,27 +43,22 @@ class Nuevo extends Component {
     })
   }
 
-  navegarNproducto() {
+  navegarIndex() {
     this.props.onAddProducto();
     this.props.history.push({
       pathname: '/'
     });
   }
 
-  onLogearse(ev) {
+  onAlta(ev) {
     this.setState({
-        loading: true
+      loading: true
     });
     ev.stopPropagation();
     ev.preventDefault();
-    const {nombre, stock, descripcion, precio, ruta, categoria} = this.state;
+    const { nombre, stock, descripcion, precio, ruta, categoria } = this.state;
     const objeto = {
-      nombre: nombre,
-      stock: stock,
-      descripcion: descripcion,  
-      precio: precio,
-      ruta: ruta,
-      categoria: categoria
+      nombre: nombre, stock: stock, descripcion: descripcion, precio: precio, ruta: ruta, categoria: categoria
     }
     fetch("http://localhost/aplicacion/proyectoDaw/nuevoPorducto.php",{
         method: 'POST', 
@@ -71,17 +67,25 @@ class Nuevo extends Component {
     ).then(res => {
       if (res.status === 200) {
         alert("registrado");
-        this.navegarNproducto();
+        this.setState({
+          loading: false,
+          error: null
+        })
+        this.navegarIndex();
+        return Promise.resolve(res);
       }
-    }).then(
+    })
+    .then(res => res.json())
+    .catch((err) => {
       this.setState({
+        error: "Este producto ya ha sido registrado",
         loading: false
-      })
-    );
+      });
+    });
   }
 
   render() {
-    const { loading, validNombe, validDesc, validSt, validP, validCa, ruta } = this.state;
+    const { loading, error, validNombe, validDesc, validSt, validP, validCa, ruta } = this.state;
     return (
       <div className="row">
         <div className="col-12">
@@ -92,6 +96,7 @@ class Nuevo extends Component {
                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                   <h3 className="text-center">Da de alta un nuevo producto</h3>
                   <form>
+                  {error && <p className="text-danger">{error}</p>}
                     <input className={`mr-2 mt-2 form-control ${validNombe ? "border-success" : validNombe === false? "border-danger": ""}`} type="text" placeholder="Nombre" onBlur={(ev) => this.validarTexto(ev, "validNombe")} onChange={(ev) => this.onChangeInput(ev)} id="nombre" />
                       {validNombe === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                     <input className={`mr-2 mt-2 form-control ${validDesc ? "border-success" : validDesc === false? "border-danger": ""}`} type="text" placeholder="Descripción" onBlur={(ev) => this.validarTexto(ev, "validDesc")} onChange={(ev) => this.onChangeInput(ev)} id="descripcion" />
@@ -113,7 +118,7 @@ class Nuevo extends Component {
                       {ruta && <small>{ruta}</small>}
                     </div>
                     <div>
-                      <input className="btn btn-primary float-right mt-2" type="submit" value="Dar de alta" onClick={(ev) => this.onLogearse(ev)} />
+                      <input className="btn btn-primary float-right mt-2" type="submit" value="Dar de alta" onClick={(ev) => this.onAlta(ev)} />
                     </div>
                   </form>
                 </div>

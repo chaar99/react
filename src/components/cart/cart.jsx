@@ -19,14 +19,14 @@ class Cart extends Component {
     
   openCar() {
     this.setState({
-        cartOpen: true
+      cartOpen: true
     });
     document.body.style.overflow = "hidden";
   }
 
   closeCar() {
     this.setState({
-        cartOpen: false
+      cartOpen: false
     });
     document.body.style.overflow = "scroll";
   }
@@ -60,7 +60,7 @@ class Cart extends Component {
     ev.preventDefault();
     const { productsCar } = this.props;
     if( productsCar.length !== 0){debugger;
-      if(localStorage.getItem("registrado") === "false" || localStorage.getItem("registrado") == null){
+      if(localStorage.getItem("registrado") !== "true") {
         this.props.history.push({
           pathname:'/login'
         });

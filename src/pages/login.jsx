@@ -4,87 +4,86 @@ import { email, longitudPass } from '../utils/validaciones';
 import Load from '../components/Load/load';
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            password: null,
-            correo: null,
-            persona: [],
-            validCorreo: null,
-            validPass: null,
-            error: null,
-            loading: false,
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: null,
+      correo: null,
+      persona: [],
+      validCorreo: null,
+      validPass: null,
+      error: null,
+      loading: false,
+    };
+  }
 
-    comprobarDisabled() {
-        const { validPass, validCorreo } = this.state;
-        return !(validPass && validCorreo);
-    }
+  comprobarDisabled() {
+    const { validPass, validCorreo } = this.state;
+    return !(validPass && validCorreo);
+  }
 
-    onChangeInput(ev) {
-        ev.stopPropagation();
-        ev.preventDefault();
+  onChangeInput(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.setState({
+      [ev.target.id]:ev.target.value
+    });
+  }
+  
+  navegarIndex() {
+    this.props.onAddProducto();
+    this.props.history.push({
+      pathname: '/'
+    });
+  }
+  onLogearse(ev) {
+    this.setState({
+      loading: true
+    });
+    ev.stopPropagation();
+    ev.preventDefault();
+    const { password, correo } = this.state;
+    const objeto = {
+      password : password,
+      correo : correo
+    }
+    fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php", {
+      method: 'POST',
+      body: JSON.stringify(objeto),
+    }
+    ).then(res => {
+      if (res.status === 200) {
+        //creas la cookie en el localstorage o donde quieras
         this.setState({
-            [ev.target.id]:ev.target.value
+          loading: false,
+          error: null
         });
-    }
-    
-    navegarIndex() {
-      this.props.onAddProducto();
-      this.props.history.push({
-        pathname: '/'
+        localStorage.setItem("registrado", true);
+        //this.navegarIndex();
+        return Promise.resolve(res);
+      }
+    })
+    .then(res => res.json())
+    .catch((err) => {
+      this.setState({
+        error: "Correo o contraseña equivocados.",
+        loading: false
       });
-    }
-    onLogearse(ev) {
-        this.setState({
-            loading: true
-        });
-        ev.stopPropagation();
-        ev.preventDefault();
-        const {password, correo} = this.state;
-        const objeto = {
-            password : password,
-            correo : correo
-        }
-        fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php", {
-              method: 'POST',
-              body: JSON.stringify(objeto),
-            }
-        ).then(res => {
-            if (res.status === 200) {
-                //creas la cookie en el localstorage o donde quieras
-                this.setState({
-                  loading: false,
-                  error: null
-                });
-                localStorage.setItem("registrado", true);
-                //this.navegarIndex();
-                return Promise.resolve(res);
-            }
-        })
-        .then(res => res.json())
-        .catch((err) => {
-            this.setState({
-                error: "Correo o contraseña equivocados.",
-                loading: false
-            });
-            localStorage.setItem("registrado", false);
-        });;
-       
-    }
+      localStorage.setItem("registrado", false);
+    });
+  }
 
-    validarEmail(ev) {
-        this.setState({
-            validCorreo: email(ev, ev.target.value)
-        });
-    }
+  validarEmail(ev) {
+    this.setState({
+      validCorreo: email(ev, ev.target.value)
+    });
+  }
 
-    validarPass(ev) {
-        this.setState({
-            validPass: longitudPass(ev, ev.target.value)
-        })
-    }
+  validarPass(ev) {
+    this.setState({
+      validPass: longitudPass(ev, ev.target.value)
+    })
+  }
 
   render() {
     const { error, loading, validCorreo,validPass } = this.state;
@@ -101,7 +100,7 @@ class Login extends Component {
                             <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" placeholder="Email" id="correo" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
                               {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                             <input className={`mr-2 mt-2 form-control ${validPass ? "border-success" : validPass === false? "border-danger": ""}`} type="password" placeholder="Password" id="password" onBlur={(ev) => this.validarPass(ev)} onChange={(ev) => this.onChangeInput(ev)} />
-                              {/* {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>} */}
+                              {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                             <div>
                               <button className="btn btn-primary float-right mt-2" type="submit"  onClick={(ev) => this.onLogearse(ev)}>Inicia sesión</button>
                             </div>

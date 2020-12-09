@@ -5,26 +5,24 @@ import Load from '../components/Load/load';
 
 class Dashboard extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
+  constructor(props) {
+    super(props);
+  }
    
-    render() {
-        const { productos, loading, addProductCart } = this.props;
-        return (
-            <div>
-                {loading && <Load />}
-                {!loading && 
-                    <div className="d-flex flex-column">
-                        {/* <Filtro aplicarFiltros={aplicarFiltros} /> */}
-                        <Lista productos={productos} addProductCart={addProductCart} />
-                    </div>
-                }
-            </div>
-        );
-    }
+  render() {
+    const { productos, loading, addProductCart } = this.props;
+    return (
+      <div>
+        {loading && <Load />}
+        {!loading && 
+          <div className="d-flex flex-column">
+            {/* <Filtro aplicarFiltros={aplicarFiltros} /> */}
+            <Lista productos={productos} addProductCart={addProductCart} />
+          </div>
+        }
+      </div>
+    );
+  }
 };
 
 export default Dashboard;

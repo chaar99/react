@@ -14,9 +14,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        loading: false,
-        productos : [],
-        productsCar : []
+      loading: false,
+      productos : [],
+      productsCar : []
     };
   }
 
@@ -30,10 +30,10 @@ class App extends Component {
     });
     fetch("http://localhost/aplicacion/proyectoDaw/index.php").then(res => res.json())
     .then(res => {
-        this.setState({
-            productos: res,
-            loading: false
-        });
+      this.setState({
+        productos: res,
+        loading: false
+      });
     });
     this.getProductsCar();
   }
@@ -43,7 +43,7 @@ class App extends Component {
     const idsProducts = productsCar;
     idsProducts.push(id);
     this.setState({
-        productsCar: idsProducts
+      productsCar: idsProducts
     }); 
     localStorage.setItem("productos", productsCar);
   }
@@ -51,7 +51,7 @@ class App extends Component {
   getProductsCar() {
     const idsProducts = localStorage.getItem("productos");
     this.setState({
-        productsCar: idsProducts ? idsProducts.split(',') : []
+      productsCar: idsProducts ? idsProducts.split(',') : []
     });
   }
 

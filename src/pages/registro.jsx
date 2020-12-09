@@ -12,7 +12,7 @@ class Registro extends Component {
       correo: null, validCorreo: null,
       apell: null, validApell: null,
       dni: null, validDNI: null,
-      loading: false
+      loading: false, error: null
     };
   }
 
@@ -51,40 +51,47 @@ class Registro extends Component {
   }
 
   validarPass(ev) {
-      var valor = ev.target.value;
-      this.setState({
-          validPass: longitudPass(ev, valor)
-      })
+    var valor = ev.target.value;
+    this.setState({
+      validPass: longitudPass(ev, valor)
+    })
   }
 
   onLogearse(ev) {
     this.setState({
-        loading: true
+      loading: true
     });
     ev.stopPropagation();
     ev.preventDefault();
     const { nombre, password, correo, apell, dni } = this.state;
     const objeto = {
-      nombre: nombre,
-      password: password,
-      correo: correo,
-      apell: apell,
-      dni: dni
+      nombre: nombre, password: password, correo: correo, apell: apell, dni: dni
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/registro_usuario.php",
-      {
-          method: 'POST',
-          body: JSON.stringify(objeto),
+    fetch("http://localhost/aplicacion/proyectoDaw/registro_usuario.php",{
+      method: 'POST',
+      body: JSON.stringify(objeto),
+    }
+    ).then(res => {
+      if (res.status === 200) {
+        debugger;
+        this.setState({
+          loading: false,
+          error: null
+        })
+        return Promise.resolve(res);
       }
-    ).then(
+    })
+    .then(res => res.json())
+    .catch((err) => {
       this.setState({
-          loading: false
-      })
-    );
+        error: "Este correo ya corresponde con un usuario",
+        loading: false
+      });
+    });
   }
 
   render() {
-    const { loading, validCorreo, validNombe, validApell, validDNI, validPass } = this.state;
+    const { loading, error, validCorreo, validNombe, validApell, validDNI, validPass } = this.state;
     return (
       <div className="row">
         <div className="col-12">
@@ -95,6 +102,7 @@ class Registro extends Component {
                 <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                   <h3 className="text-center">Registrate</h3>
                   <form>
+                  {error && <p className="text-danger">{error}</p>}
                     <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" required="required" id="correo" placeholder="Email" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
                       {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                     <input className={`mr-2 mt-2 form-control ${validNombe ? "border-success" : validNombe === false? "border-danger": ""}`} type="text" placeholder="Name" id="nombre" onBlur={(ev) => this.validarTexto(ev, "validNombe")} onChange={(ev) => this.onChangeInput(ev)} />
@@ -110,9 +118,9 @@ class Registro extends Component {
                 </div>
               </div>
               <div className="text-center mt-3">
-                  <p>¿Ya tienes una cuenta?
-                      <Link className="ml-2" to="/login">Inicia sesión</Link>
-                  </p>    
+                <p>¿Ya tienes una cuenta?
+                  <Link className="ml-2" to="/login">Inicia sesión</Link>
+                </p>    
               </div>
             </div>
           }
