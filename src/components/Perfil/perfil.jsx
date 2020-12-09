@@ -9,7 +9,6 @@ class Perfil extends Component {
     super(props);
     this.state = {
       userOpen: false,
-      cookie: true
     };
   }
 
@@ -33,7 +32,7 @@ class Perfil extends Component {
   }
 
   render() {
-    const {cookie} = this.state;
+    const {persona} = this.props;
     return (            
       <div>
         <Button variant="link" className="user">
@@ -42,7 +41,7 @@ class Perfil extends Component {
         <div className="cart-content" style={{width: this.widthCartContent()}}>
           <UserHeader closeUser={() => this.closeUser()} />
           <div>
-            <CartContentProducts cookie={cookie}/>
+            <UserContent persona={persona}/>
           </div>
         </div>
       </div>  
@@ -59,20 +58,29 @@ function UserHeader(props) {
   )
 };
 
-function CartContentProducts(props) {
-  const {cookie} = props;
+function UserContent(props) {
+  const { persona } = props;
   return (
     <div>
-        {!cookie && <Button>Inicia sesión</Button>}
-        {cookie &&
-          <div>
-            <p>Existe la cookie</p>
-            <p>nombre</p>
-            <p>Apellidos</p>
-            <p>Correo</p>
-            <Button>Cierra sesion</Button>
-          </div>   
-        } 
+      <p>hola</p>
+        {persona.map((user, index) => (
+          <RenderUser usuario={user} key={index} />
+        ))}        
+    </div>
+  )
+}
+
+function RenderUser(props){
+  const {usuario} = props;
+  return (
+    <div>
+        <div>
+          <p>Existe la cookie</p>
+          <p>nombre: {usuario.nombre}</p>
+          <p>Apellidos</p>
+          <p>Correo</p>
+          <Button>Cierra sesion</Button>
+        </div>   
     </div>
   )
 }

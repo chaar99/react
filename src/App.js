@@ -7,6 +7,7 @@ import Login from './pages/login';
 import Nuevo from './pages/nuevoProducto';
 import Detalle from './pages/detalle';
 import Tramitar from './pages/tramitar';
+import Editar from './pages/editar';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -16,12 +17,29 @@ class App extends Component {
     this.state = {
       loading: false,
       productos : [],
-      productsCar : []
+      productsCar : [], persona: []
     };
   }
 
   componentDidMount() {
     this.obtenerProductos();
+    this.ObtenerUser();
+  }
+
+  ObtenerUser() {
+    debugger;
+    if( localStorage.getItem("registrado") === "true") {
+      this.setState({
+        loading: true
+      });
+      fetch("http://localhost/aplicacion/proyectoDaw/usuario.php").then(res => res.json())
+      .then(res => {
+        this.setState({
+          persona: res,
+          loading: false
+        });
+      });
+    }
   }
 
   obtenerProductos() {
@@ -44,7 +62,7 @@ class App extends Component {
     idsProducts.push(id);
     this.setState({
       productsCar: idsProducts
-    }); 
+    });
     localStorage.setItem("productos", productsCar);
   }
 
@@ -67,10 +85,11 @@ class App extends Component {
   // }
 
   render() {
-    const { productos, loading, productsCar } = this.state;
+    const { productos, loading, productsCar, persona } = this.state;
     return (
       <Router>
-          <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
+          {/* persona={persona} */}
+          <Menu productos={productos} productsCar={productsCar}  onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
           <Route exact path="/" component={()=>
             <Dashboard
               productos={productos}
@@ -81,7 +100,7 @@ class App extends Component {
           />
           <Route exact path="/registro" component={Registro} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/nuevoProducto" component={() => 
+          <Route exact path="/nuevoProducto" component={() =>
             <Nuevo onAddProducto={() => this.obtenerProductos()} />} />
           <Route exact path="/tramite" component={() =>
             <Tramitar
@@ -89,6 +108,7 @@ class App extends Component {
             />}
           />
           <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />} />
+          <Route exact path="/editar" component={Editar} />
           <Footer />
       </Router>
     );
