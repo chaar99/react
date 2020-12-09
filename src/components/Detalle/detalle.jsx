@@ -22,6 +22,11 @@ class DetalleP extends Component {
     });
   }
 
+  user(ev) {
+    if (localStorage.getItem("registrado") === "true"){
+      // si es usuario administrador, ver boton
+    }
+  }
   render() {
     const { addProductCart, elemento } = this.props;
     const ident = elemento.id_productos;
