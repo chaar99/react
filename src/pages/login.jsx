@@ -7,13 +7,9 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      password: null,
-      correo: null,
-      persona: [],
-      validCorreo: null,
-      validPass: null,
-      error: null,
-      loading: false,
+      password: null, validPass: null,
+      correo: null, validCorreo: null,
+      error: null, loading: false,
     };
   }
 
@@ -53,7 +49,6 @@ class Login extends Component {
     }
     ).then(res => {
       if (res.status === 200) {
-        //creas la cookie en el localstorage o donde quieras
         this.setState({
           loading: false,
           error: null
@@ -67,7 +62,9 @@ class Login extends Component {
     .catch((err) => {
       this.setState({
         error: "Correo o contraseña equivocados.",
-        loading: false
+        loading: false,
+        validPass: null,
+        validCorreo: null
       });
       localStorage.setItem("registrado", false);
     });

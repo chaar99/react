@@ -25,7 +25,7 @@ class Tramite extends Component {
           tit_tarjeta: null, validaTit: null,
           num_tarjeta: null, validaNum: null,
           date: null, validaDate: null,
-          cvv: null, validaCVV: null
+          cvv: null, validaCVV: null, loading: false, error: null
         };
     }
 
@@ -105,10 +105,38 @@ class Tramite extends Component {
       }) 
     }
 
-    aceptar(ev) {
+    aceptar(ev, total) {
+      this.setState({
+        loading: true
+      });
       ev.stopPropagation();
       ev.preventDefault();
-      // función para registar el producto
+      const { nombre, apellido, telefono, calle, detC, ciudad, prov, codP } = this.state;
+      const objeto = {
+        nombre: nombre, apellido: apellido, telefono: telefono, calle: calle, detC: detC, ciudad: ciudad, prov: prov, codP: codP, total: total
+      }
+      fetch("http://localhost/aplicacion/proyectoDaw/tramite.php",{
+          method: 'POST', 
+          body: JSON.stringify(objeto), 
+        }
+      ).then(res => {
+        if (res.status === 200) {
+          alert("comprado");
+          this.setState({
+            loading: false,
+            error: null
+          })
+          this.navegarIndex();
+          return Promise.resolve(res);
+        }
+      })
+      .then(res => res.json())
+      .catch((err) => {
+        this.setState({
+          error: "Revisa tus productos",
+          loading: false
+        });
+      });
     }
 
     renderFirstColum() {
@@ -233,7 +261,7 @@ class Tramite extends Component {
             <p>Precio por {productsCar.length} Funkos: {total} €</p>
             <p>Precio por gasto de envío: {envio} €</p>
             <p>Total: {suma} €</p>
-            <button className="btn btn-primary" onClick={(ev) => this.aceptar(ev)}>Aceptar</button>
+            <button className="btn btn-primary" onClick={(ev, total) => this.aceptar(ev, suma)}>Aceptar</button>
           </div>
         </div>
       )

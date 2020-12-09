@@ -177,6 +177,5 @@ export const validarFech = (ev, valor) => {
       estado = false;
     }
   }
-  
   return estado;
 }

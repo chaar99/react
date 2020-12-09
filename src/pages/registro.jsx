@@ -78,6 +78,7 @@ class Registro extends Component {
           loading: false,
           error: null
         })
+        localStorage.setItem("registrado", true);
         return Promise.resolve(res);
       }
     })
@@ -87,6 +88,7 @@ class Registro extends Component {
         error: "Este correo ya corresponde con un usuario",
         loading: false
       });
+      localStorage.setItem("registrado", false);
     });
   }
 
