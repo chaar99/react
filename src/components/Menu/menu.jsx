@@ -1,10 +1,9 @@
 import { Component } from 'react';
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav,Form } from "react-bootstrap";
 import Cart from '../cart/cart';
 import Perfil from '../Perfil/perfil';
 import Logo from "../Logo/logo";
 
-import './menu.css';
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -15,13 +14,19 @@ class Menu extends Component {
   render() {
     const { productos, productsCar, onEmptyCart, getProductsCar } = this.props;
     return (
-      <Navbar bg="dark" variant="dark" className="top-menu">
-        <BrandNav />
-        <MenuNav />
-        <Perfil /> 
-        {/* persona={persona} */}
-        <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} getProductsCar={getProductsCar} />
-      </Navbar>
+      <div className="header2">
+        <Navbar bg="dark" variant="dark"  expand="lg">
+          <BrandNav />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <MenuNav />
+            <Perfil /> 
+          </Navbar.Collapse>
+          <Form inline>
+            <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} getProductsCar={getProductsCar} />  
+          </Form>
+        </Navbar>
+      </div>
     );
   }
 };

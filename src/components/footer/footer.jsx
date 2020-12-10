@@ -13,19 +13,20 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer className="bg-dark row text-center mx-auto">
-        <div className="col-12 ">
-          <div className="p-2 m-2">
-            <Tw className="w-edit h-25 m-5"/>
-            <At className="w-edit h-25 m-5"/>
-            <Wh className="w-edit h-25 m-5"/>
-            <In className="w-edit h-25 m-5"/>
+      <div className="footer2 bg-dark">
+        <div className="row mx-auto">
+          <div className="col-12 text-center">
+              <Tw className="w-edit h-25 m-5"/>
+              <At className="w-edit h-25 m-5"/>
+              <Wh className="w-edit h-25 m-5"/>
+              <In className="w-edit h-25 m-5"/>
+          </div>
+          <div className="col-12 text-center">© 2020 Copyright:
+              <a href="https://mdbootstrap.com/"> FunkoChar</a>
           </div>
         </div>
-        <div className="col-12">© 2020 Copyright:
-            <a href="https://mdbootstrap.com/"> FunkoChar</a>
-        </div>
-      </footer>
+      </div>
+      
     );
   }
 };
