@@ -59,8 +59,8 @@ class Cart extends Component {
     ev.stopPropagation();
     ev.preventDefault();
     const { productsCar } = this.props;
-    if( productsCar.length !== 0){debugger;
-      if(localStorage.getItem("registrado") !== "true") {
+    if( productsCar.length !== 0){
+      if(!localStorage.getItem("registrado")) {
         this.props.history.push({
           pathname:'/login'
         });

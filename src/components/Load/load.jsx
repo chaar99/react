@@ -2,12 +2,12 @@ import { Component } from 'react'
 
 class Load extends Component {
   render() {
-    return (            
-      <div className="d-flex justify-content-center" style={{ width: '100%', height: '500px', marginTop: '25%'}}>
-        <div className="spinner-border text-primary" style={{ width: '10rem', height: '10rem' }} role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
+    return (          
+        <div className="d-flex justify-content-center mt-5">
+          <div className="spinner-border text-primary" style={{ width: '10rem', height: '10rem' }} role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+      </div> 
     );
   }
 };

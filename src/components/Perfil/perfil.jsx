@@ -9,12 +9,15 @@ class Perfil extends Component {
     super(props);
     this.state = {
       userOpen: false,
+      usuario: {}
     };
   }
 
   openUser() {
+    const usuario = JSON.parse(localStorage.getItem('registrado'));
     this.setState({
-      userOpen: true
+      userOpen: true,
+      usuario, 
     });
     document.body.style.overflow = "hidden";
   }
@@ -32,7 +35,7 @@ class Perfil extends Component {
   }
 
   render() {
-    // const {persona} = this.props;
+    const {usuario} = this.state;
     return (            
       <div>
         <Button variant="link" className="user">
@@ -41,7 +44,7 @@ class Perfil extends Component {
         <div className="cart-content" style={{width: this.widthCartContent()}}>
           <UserHeader closeUser={() => this.closeUser()} />
           <div>
-            {/* <UserContent persona={persona}/> */}
+          <RenderUser usuario={usuario}/>
           </div>
         </div>
       </div>  
@@ -73,18 +76,17 @@ function UserHeader(props) {
 //   )
 // }
 
-// function RenderUser(props){
-//   const {usuario} = props;
-//   return (
-//     <div>
-//         <div>
-//           <p>Existe la cookie</p>
-//           <p>nombre: {usuario.nombre}</p>
-//           <p>Apellidos</p>
-//           <p>Correo</p>
-//           <Button>Cierra sesion</Button>
-//         </div>   
-//     </div>
-//   )
-// }
+function RenderUser({ usuario }) {
+  return (
+    <div>
+        <div>
+          <p>Existe la cookie</p>
+          <p>nombre: {usuario.nombre}</p>
+          <p>Apellidos</p>
+          <p>Correo</p>
+          <Button>Cierra sesion</Button>
+        </div>   
+    </div>
+  )
+}
 export default Perfil;

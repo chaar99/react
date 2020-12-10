@@ -16,9 +16,9 @@ class Detalle extends Component {
       return null;
     }
     return (
-      <>
+      <div className="container">
         <DetalleP elemento={location.state.elemento} addProductCart={addProductCart} />
-      </>
+      </div>
     );
   }
 };

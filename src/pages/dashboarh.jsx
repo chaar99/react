@@ -11,14 +11,14 @@ class Dashboard extends Component {
   render() {
     const { productos, loading, addProductCart } = this.props;
     return (
-      <>
+      <div className="container2">
         {loading && <Load />}
         {!loading && 
           <div className="d-flex flex-column" >
             <Lista productos={productos} addProductCart={addProductCart} />
           </div>
         }
-      </>
+      </div>
     );
   }
 };

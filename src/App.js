@@ -23,23 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     this.obtenerProductos();
-    // this.ObtenerUser();
-  }
-
-  ObtenerUser() {
-    debugger;
-    if( localStorage.getItem("registrado") === "true") {
-      this.setState({
-        loading: true
-      });
-      fetch("http://localhost/aplicacion/proyectoDaw/usuario.php").then(res => res.json())
-      .then(res => {
-        this.setState({
-          persona: res,
-          loading: false
-        });
-      });
-    }
+    //this.ObtenerUser();
   }
 
   obtenerProductos() {

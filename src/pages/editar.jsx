@@ -16,9 +16,9 @@ class Editar extends Component {
       return null;
     }
     return (
-      <>
+      <div className="container2">
         <EditarP />
-      </>
+      </div>
     );
   }
 };

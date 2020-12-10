@@ -87,7 +87,7 @@ class Nuevo extends Component {
   render() {
     const { loading, error, validNombe, validDesc, validSt, validP, validCa, ruta } = this.state;
     return (
-      <>
+      <div className="container2">
         {loading && <Load />}
         {!loading && 
             <div className="row mx-auto my-5">
@@ -122,7 +122,7 @@ class Nuevo extends Component {
               </div>
             </div>
         }
-      </>
+      </div>
     );
   }
 };

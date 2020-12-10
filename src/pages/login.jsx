@@ -46,19 +46,19 @@ class Login extends Component {
     fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php", {
       method: 'POST',
       body: JSON.stringify(objeto),
-    }
-    ).then(res => {
+    })
+    .then(res => {
       if (res.status === 200) {
         this.setState({
           loading: false,
           error: null
         });
-        localStorage.setItem("registrado", true);
-        //this.navegarIndex();
-        return Promise.resolve(res);
       }
+      return res.json();
     })
-    .then(res => res.json())
+    .then(res => {
+        localStorage.setItem("registrado", JSON.stringify(res));
+    })
     .catch((err) => {
       this.setState({
         error: "Correo o contraseña equivocados.",
@@ -88,7 +88,7 @@ class Login extends Component {
       <>
         {loading && <Load />}
         {!loading &&
-          <>
+          <div className="container2">
             <div className="row mx-auto mt-5">
               <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                 <h3 className="text-center">Inicia sesión</h3>
@@ -109,7 +109,7 @@ class Login extends Component {
                 <Link className="ml-2" to="/registro">Registrate</Link>
               </p>    
             </div>
-          </>
+          </div>
         }
       </>
     );
