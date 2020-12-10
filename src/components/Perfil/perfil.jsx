@@ -32,7 +32,7 @@ class Perfil extends Component {
   }
 
   render() {
-    const {persona} = this.props;
+    // const {persona} = this.props;
     return (            
       <div>
         <Button variant="link" className="user">
@@ -41,7 +41,7 @@ class Perfil extends Component {
         <div className="cart-content" style={{width: this.widthCartContent()}}>
           <UserHeader closeUser={() => this.closeUser()} />
           <div>
-            <UserContent persona={persona}/>
+            {/* <UserContent persona={persona}/> */}
           </div>
         </div>
       </div>  
@@ -52,36 +52,39 @@ class Perfil extends Component {
 function UserHeader(props) {
   const { closeUser } = props;
   return (
-    <div>
-      <Close onClick={() => closeUser()} />
+    <div className="cart-content-header">
+      <div>
+        <Close onClick={() => closeUser()} />
+        <h2>Perfil</h2>
+      </div>
     </div>
   )
 };
 
-function UserContent(props) {
-  const { persona } = props;
-  return (
-    <div>
-      <p>hola</p>
-        {persona.map((user, index) => (
-          <RenderUser usuario={user} key={index} />
-        ))}        
-    </div>
-  )
-}
+// function UserContent(props) {
+//   const { persona } = props;
+//   return (
+//     <div>
+//       <p>hola</p>
+//         {persona.map((user, index) => (
+//           <RenderUser usuario={user} key={index} />
+//         ))}        
+//     </div>
+//   )
+// }
 
-function RenderUser(props){
-  const {usuario} = props;
-  return (
-    <div>
-        <div>
-          <p>Existe la cookie</p>
-          <p>nombre: {usuario.nombre}</p>
-          <p>Apellidos</p>
-          <p>Correo</p>
-          <Button>Cierra sesion</Button>
-        </div>   
-    </div>
-  )
-}
+// function RenderUser(props){
+//   const {usuario} = props;
+//   return (
+//     <div>
+//         <div>
+//           <p>Existe la cookie</p>
+//           <p>nombre: {usuario.nombre}</p>
+//           <p>Apellidos</p>
+//           <p>Correo</p>
+//           <Button>Cierra sesion</Button>
+//         </div>   
+//     </div>
+//   )
+// }
 export default Perfil;

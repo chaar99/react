@@ -271,14 +271,14 @@ class Tramite extends Component {
       const productosDetail = productsDetail(productos, productsCar);
       return (
         <>
-          <div className="tramite row my-5">
+          <div className="tramite row mx-auto my-5">
             <div className="col-12 col-sm-1"></div>
             {this.renderFirstColum()}
             {this.renderSecondColum()}
             {this.renderThirdColum()}
             <div className="col-12 col-sm-1"> </div>
           </div>
-          <div className="row">
+          <div className="row mx-auto">
             {this.renderDetail(productosDetail)}
           </div>
         </>

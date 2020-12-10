@@ -3,8 +3,8 @@ import { Component } from 'react'
 class Load extends Component {
   render() {
     return (            
-      <div className="d-flex justify-content-center" >
-        <div className="spinner-border text-primary" style={{ width: '15rem', height: '15rem' }} role="status">
+      <div className="d-flex justify-content-center" style={{ width: '100%', height: '500px', marginTop: '25%'}}>
+        <div className="spinner-border text-primary" style={{ width: '10rem', height: '10rem' }} role="status">
           <span className="sr-only">Loading...</span>
         </div>
       </div>

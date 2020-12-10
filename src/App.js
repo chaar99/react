@@ -23,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     this.obtenerProductos();
-    this.ObtenerUser();
+    // this.ObtenerUser();
   }
 
   ObtenerUser() {
@@ -80,22 +80,17 @@ class App extends Component {
     })
   }
 
-  // prueba(valores) {
-  //   debugger;
-  // }
-
   render() {
-    const { productos, loading, productsCar, persona } = this.state;
+    const { productos, loading, productsCar } = this.state;
     return (
       <Router>
           {/* persona={persona} */}
-          <Menu productos={productos} productsCar={productsCar}  onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
+          <Menu productos={productos} productsCar={productsCar} onEmptyCart={(id) => this.onEmptyCart(id)} getProductsCar={() => this.getProductsCar()}/>
           <Route exact path="/" component={()=>
             <Dashboard
               productos={productos}
               loading={loading}
               addProductCart={(id, nombre)=> this.addProductCart(id, nombre)}
-              // aplicarFiltros={(valores)=> this.prueba(valores)}
             />}
           />
           <Route exact path="/registro" component={Registro} />

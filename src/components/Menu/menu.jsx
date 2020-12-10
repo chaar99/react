@@ -13,12 +13,12 @@ class Menu extends Component {
   }
 
   render() {
-    const { productos, productsCar, onEmptyCart, getProductsCar, persona } = this.props;
+    const { productos, productsCar, onEmptyCart, getProductsCar } = this.props;
     return (
       <Navbar bg="dark" variant="dark" className="top-menu">
         <BrandNav />
         <MenuNav />
-        <Perfil  /> 
+        <Perfil /> 
         {/* persona={persona} */}
         <Cart productos={productos} productsCar={productsCar} onEmptyCart={onEmptyCart} getProductsCar={getProductsCar} />
       </Navbar>
@@ -36,11 +36,11 @@ function BrandNav() {
 
 function MenuNav() {
   return (
-    <Nav className="mr-auto">
+    <Nav className="mr-auto ">
+      <Nav.Link href="/">Inicio</Nav.Link>
       <Nav.Link href="login">Inicia sesion</Nav.Link>
       <Nav.Link href="registro">Registrate</Nav.Link>
       <Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>
-      <Nav.Link href="/">Inicio</Nav.Link>
     </Nav>
   )
 }

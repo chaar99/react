@@ -95,13 +95,12 @@ class Registro extends Component {
   render() {
     const { loading, error, validCorreo, validNombe, validApell, validDNI, validPass } = this.state;
     return (
-      <div className="row">
-        <div className="col-12">
+      <>
           {loading && <Load />}
           {!loading && 
-            <div className="d-flex flex-column my-5">
-              <div className="row">
-                <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
+          <>
+          <div className="row mx-auto mt-5">
+            <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
                   <h3 className="text-center">Registrate</h3>
                   <form>
                   {error && <p className="text-danger">{error}</p>}
@@ -124,10 +123,9 @@ class Registro extends Component {
                   <Link className="ml-2" to="/login">Inicia sesión</Link>
                 </p>    
               </div>
-            </div>
+            </>
           }
-        </div>
-      </div>
+      </>
     );
   }
 };

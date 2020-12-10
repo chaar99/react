@@ -13,19 +13,17 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer className="d-flex flex-column bg-dark" /*style={{position: 'reglative', bottom: '0', left: '0', width: '100%', height: '25%', position: 'absolute'}}*/>
-        <div className="d-flex justify-content-center ">
+      <footer className="bg-dark row text-center mx-auto">
+        <div className="col-12 ">
           <div className="p-2 m-2">
-            <div className="">
-              <Tw className="w-edit h-25 m-5"/>
-              <At className="w-edit h-25 m-5"/>
-              <Wh className="w-edit h-25 m-5"/>
-              <In className="w-edit h-25 m-5"/>
-            </div>
+            <Tw className="w-edit h-25 m-5"/>
+            <At className="w-edit h-25 m-5"/>
+            <Wh className="w-edit h-25 m-5"/>
+            <In className="w-edit h-25 m-5"/>
           </div>
         </div>
-        <div className="d-flex justify-content-center">© 2020 Copyright:
-            <a href="https://mdbootstrap.com/">FunkoChar</a>
+        <div className="col-12">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> FunkoChar</a>
         </div>
       </footer>
     );
