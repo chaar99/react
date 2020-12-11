@@ -17,14 +17,12 @@ class App extends Component {
     this.state = {
       loading: false,
       productos : [],
-      productsCar : [], persona: []
+      productsCar : []
     };
   }
 
   componentDidMount() {
-    debugger;
     this.obtenerProductos();
-    //this.ObtenerUser();
   }
 
   obtenerProductos() {
@@ -41,7 +39,7 @@ class App extends Component {
     this.getProductsCar();
   }
 
-  addProductCart(id, name) {
+  addProductCart(id) {
     const { productsCar } = this.state;
     const idsProducts = productsCar;
     idsProducts.push(id);

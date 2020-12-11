@@ -1,3 +1,11 @@
 .w-edit {
-    width: 30px;
+    width: 25px;
+    height: 25px;
+    fill: rgb(201, 201, 201);
+}
+.enlaceF {
+    color: rgb(201, 201, 201);
+}
+.enlaceF a{
+    color: teal;
 }

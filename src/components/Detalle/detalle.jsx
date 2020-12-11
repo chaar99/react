@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import {ReactComponent as Close} from "../../assets/close.svg";
 
 class DetalleP extends Component {
   constructor(props) {
@@ -35,8 +36,8 @@ class DetalleP extends Component {
     const { addProductCart, elemento, history } = this.props;
     return (       
       <div className="row mt-4 m-auto">
-        <div className="col-12 col-lg-2">
-          <button type="button" onClick={(ev) => history.goBack()} className="btn btn-link">Volver</button>
+        <div className="col-12 col-lg-2 pt-4">
+          <Close onClick={(ev) => history.goBack()} className="m-close float-right pointer" />
         </div>
         <div className="col-12 col-lg-5">
           <img className="img-fluid" src={"./img/"+ elemento.ruta} alt={elemento.nombre}/>

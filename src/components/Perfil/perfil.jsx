@@ -29,23 +29,25 @@ class Perfil extends Component {
     document.body.style.overflow = "scroll";
   }
 
-  widthCartContent() {
+  widthUserContent() {
     const { userOpen } = this.state;
-    return userOpen ? 400 : 0;
+    const maxWidth = window.screen.width > 600 ? 400 : window.screen.width;
+    return userOpen ? maxWidth : 0;
   }
 
   render() {
-    const {usuario} = this.state;
+    const { usuario } = this.state;
     return (            
       <div>
         <Button variant="link" className="user">
           <User onClick={() =>this.openUser()}/>
         </Button>
-        <div className="cart-content" style={{width: this.widthCartContent()}}>
+        <div className="cart-content" style={{width: this.widthUserContent()}}>
           <UserHeader closeUser={() => this.closeUser()} />
-          <div>
-          <RenderUser usuario={usuario}/>
+          <div className="h-100 w-auto">
+            {localStorage.getItem('registrado') != "false" && <RenderUser usuario={usuario}/>}
           </div>
+          <UserContentFooter usuario={usuario} />
         </div>
       </div>  
     );
@@ -63,29 +65,25 @@ function UserHeader(props) {
     </div>
   )
 };
-
-// function UserContent(props) {
-//   const { persona } = props;
-//   return (
-//     <div>
-//       <p>hola</p>
-//         {persona.map((user, index) => (
-//           <RenderUser usuario={user} key={index} />
-//         ))}        
-//     </div>
-//   )
-// }
-
 function RenderUser({ usuario }) {
   return (
-    <div>
-        <div>
-          <p>Existe la cookie</p>
-          <p>nombre: {usuario.nombre}</p>
-          <p>Apellidos</p>
-          <p>Correo</p>
-          <Button>Cierra sesion</Button>
+    <div className="cart-content-product w- 100 h-100">
+        <div className="w-100 h-100 pl-2 pt-2 text-white">
+          <p>Correo: {usuario.correo}</p>
+          <p>Nombre: {usuario.nombre}</p>
+          <p>Apellidos: {usuario.surname_1} {usuario.surname_2 === "null"? "" : usuario.surname_2}</p>
+          <p>DNI: {usuario.DNI}</p>
         </div>   
+    </div>
+  )
+}
+
+function UserContentFooter({ usuario }) {
+  return(
+    <div className="cart-content-footer">
+      <Button>Cierra sesion</Button><br/>
+      {/* esto no va aqui */}
+      {usuario.idR === "1"? <Button> Eliminar Producto</Button>: ""}
     </div>
   )
 }

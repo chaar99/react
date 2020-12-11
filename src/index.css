@@ -38,9 +38,17 @@ body,html{
   z-index: 1000;
 }
 
+.header2 svg{
+  width: 40px;
+  fill: rgb(201, 201, 201);
+}
 main {
   flex: 1;
 }
 .pointer{
   cursor: pointer;
+}
+.m-close {
+  width: 20px;
+  height: 20px;
 }

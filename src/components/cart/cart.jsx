@@ -140,7 +140,7 @@ function CartContentProducts(props) {
 export function RenderProduct(props) {
   const { producto, quantity, increaseQuantity, decreaseQuantity } = props;
   return(
-    <div className="cart-content-product">
+    <div className="cart-content-product container2">
       <img className="w-25" src={"./img/"+ producto.ruta} alt="imagen"/>
       <div className="cart-content-product-info w-100">
         <div>

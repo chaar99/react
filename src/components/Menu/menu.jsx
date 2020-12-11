@@ -15,7 +15,7 @@ class Menu extends Component {
     const { productos, productsCar, onEmptyCart, getProductsCar } = this.props;
     return (
       <div className="header2">
-        <Navbar bg="dark" variant="dark"  expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg">
           <BrandNav />
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -34,7 +34,7 @@ class Menu extends Component {
 function BrandNav() {
   return (
     <Navbar.Brand>
-      <Logo />
+      <Nav.Link href="/"><Logo /></Nav.Link>
     </Navbar.Brand>
   );
 }

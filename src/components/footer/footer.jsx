@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import {ReactComponent as Tw} from "../../assets/twitter.svg";
-import {ReactComponent as At} from "../../assets/at.svg";
+import {ReactComponent as Fc} from "../../assets/facebook.svg";
 import {ReactComponent as Wh} from "../../assets/whatsapp.svg";
 import {ReactComponent as In} from "../../assets/instagram.svg";
 
@@ -12,15 +12,15 @@ class Footer extends Component {
 
   render() {
     return (
-      <div className="footer2 bg-dark">
+      <div className="bg-dark">
         <div className="row mx-auto">
           <div className="col-12 text-center">
-            <Tw className="w-edit h-25 m-5"/>
-            <At className="w-edit h-25 m-5"/>
-            <Wh className="w-edit h-25 m-5"/>
-            <In className="w-edit h-25 m-5"/>
+            <Tw className="w-edit my-3 mx-5"/>
+            <Fc className="w-edit my-3 mx-5"/>
+            <Wh className="w-edit my-3 mx-5"/>
+            <In className="w-edit my-3 mx-5"/>
           </div>
-          <div className="col-12 text-center">© 2020 Copyright:
+          <div className="col-12 text-center enlaceF mb-2">© 2020 Copyright:
             <a href="https://mdbootstrap.com/"> FunkoChar</a>
           </div>
         </div>

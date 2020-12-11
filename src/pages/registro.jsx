@@ -7,13 +7,12 @@ class Registro extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      logeado: false,
       nombre: null, validNombe: null,
       password: null, validPass: null,
       correo: null, validCorreo: null,
       apell: null, validApell: null,
       dni: null, validDNI: null,
-      loading: false, error: null
+      loading: false, error: null, logeado: false
     };
   }
 
@@ -74,7 +73,6 @@ class Registro extends Component {
     }
     ).then(res => {
       if (res.status === 200) {
-        debugger;
         this.setState({
           loading: false,
           error: null,
@@ -129,7 +127,7 @@ class Registro extends Component {
                     {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                   <input className={`mr-2 mt-2 form-control ${validDNI ? "border-success" : validDNI === false? "border-danger": ""}`} type="text" placeholder="DNI" id="dni" onBlur={(ev) => this.validarDNI(ev)} onChange={(ev) => this.onChangeInput(ev)} />
                     {validDNI === false && <p className="text-danger">Lo sentimos. Formato incorrecto.</p>}
-                  <button disabled={this.comprobarDisabled()} className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
+                  <button disabled={this.comprobarDisabled()} className="btn btn-dark float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
                 </form>
               </div>
             </div>
