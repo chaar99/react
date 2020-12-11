@@ -35,16 +35,20 @@ class Cart extends Component {
     localStorage.removeItem("productos");
   }
 
-  increaseQuantity(id) {
+  increaseQuantity(ev, id) {
     const { productsCar, getProductsCar } = this.props;
     const arrayItemsCart = productsCar;
+    ev.stopPropagation();
+    ev.preventDefault();
     arrayItemsCart.push(id);
     localStorage.setItem("productos", arrayItemsCart);
     getProductsCar();
   }
 
-  decreaseQuantity(id) {
+  decreaseQuantity(ev, id) {
     const { productsCar, getProductsCar } = this.props;
+    ev.stopPropagation();
+    ev.preventDefault();
     const result = removeItemArray(productsCar, id.toString());
     localStorage.setItem("productos", result);
     getProductsCar();
@@ -52,7 +56,8 @@ class Cart extends Component {
 
   widthCartContent() {
     const { cartOpen } = this.state;
-    return cartOpen ? 400 : 0;
+    const maxWidth = window.screen.width > 600 ? 400 : window.screen.width;
+    return cartOpen ? maxWidth : 0;
   }
 
   navegarTramite(ev, total) {
@@ -88,8 +93,8 @@ class Cart extends Component {
           <CartContentHeader closeCar={() => this.closeCar()} onEmptyCart={onEmptyCart}/>
           <div className="cart-content-products text-white">
             {allProductsId.map((idProductsCart, index) =>(
-              <CartContentProducts productos={productos} increaseQuantity={(id) => this.increaseQuantity(id)} 
-                decreaseQuantity={(id) => this.decreaseQuantity(id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
+              <CartContentProducts productos={productos} increaseQuantity={(ev, id) => this.increaseQuantity(ev, id)} 
+                decreaseQuantity={(ev, id) => this.decreaseQuantity(ev, id)} key={index} idsProductsCart={productsCar} idProductsCart={idProductsCart}/>
             ))}
           </div>
           <CartContentFooter productos={productos} productsCar={productsCar} navegarTramite={(ev, total) => this.navegarTramite(ev, total)}/>
@@ -144,8 +149,8 @@ export function RenderProduct(props) {
         </div>
         <div>
           <p>{quantity} unidade(s).</p>
-          {increaseQuantity && <button onClick={() => increaseQuantity(producto.id_productos)}>+</button>}
-          {decreaseQuantity && <button onClick={() => decreaseQuantity(producto.id_productos)}>-</button>}
+          {increaseQuantity && <button  type="button" onClick={(ev) => increaseQuantity(ev, producto.id_productos)}>+</button>}
+          {decreaseQuantity && <button  type="button" onClick={(ev) => decreaseQuantity(ev, producto.id_productos)}>-</button>}
         </div>
       </div>
     </div>

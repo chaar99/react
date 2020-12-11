@@ -111,35 +111,35 @@ class Registro extends Component {
     }
     return (
       <>
-          {loading && <Load />}
-          {!loading && 
+        {loading && <Load />}
+        {!loading && 
           <div className="container2">
             <div className="row mx-auto mt-5">
               <div className="border border-info rounded w-25 p-3 mx-auto col-10 col-sm-3">
-                    <h3 className="text-center">Registrate</h3>
-                    <form>
-                    {error && <p className="text-danger">{error}</p>}
-                      <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" required="required" id="correo" placeholder="Email" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
-                        {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
-                      <input className={`mr-2 mt-2 form-control ${validNombe ? "border-success" : validNombe === false? "border-danger": ""}`} type="text" placeholder="Name" id="nombre" onBlur={(ev) => this.validarTexto(ev, "validNombe")} onChange={(ev) => this.onChangeInput(ev)} />
-                        {validNombe === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
-                      <input className={`mr-2 mt-2 form-control ${validApell ? "border-success" : validApell === false? "border-danger": ""}`} type="text" placeholder="Surname" id="apell" onBlur={(ev) => this.validarTexto(ev, "validApell")} onChange={(ev) => this.onChangeInput(ev)} />
-                        {validApell === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
-                      <input className={`mr-2 mt-2 form-control ${validPass ? "border-success" : validPass === false? "border-danger": ""}`} type="password" placeholder="Password" id="password" onBlur={(ev) => this.validarPass(ev)} onChange={(ev) => this.onChangeInput(ev)} />
-                        {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
-                      <input className={`mr-2 mt-2 form-control ${validDNI ? "border-success" : validDNI === false? "border-danger": ""}`} type="text" placeholder="DNI" id="dni" onBlur={(ev) => this.validarDNI(ev)} onChange={(ev) => this.onChangeInput(ev)} />
-                        {validDNI === false && <p className="text-danger">Lo sentimos. Formato incorrecto.</p>}
-                      <button disabled={this.comprobarDisabled()} className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
-                    </form>
-                  </div>
-                </div>
-                <div className="text-center mt-3">
-                  <p>¿Ya tienes una cuenta?
-                    <Link className="ml-2" to="/login">Inicia sesión</Link>
-                  </p>    
-                </div>
+                <h3 className="text-center">Registrate</h3>
+                <form>
+                {error && <p className="text-danger">{error}</p>}
+                  <input className={`mr-2 mt-2 form-control ${validCorreo ? "border-success" : validCorreo === false? "border-danger": ""}`} type="text" required="required" id="correo" placeholder="Email" onBlur={(ev) => this.validarEmail(ev)} onChange={(ev) => this.onChangeInput(ev)} />
+                    {validCorreo === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                  <input className={`mr-2 mt-2 form-control ${validNombe ? "border-success" : validNombe === false? "border-danger": ""}`} type="text" placeholder="Name" id="nombre" onBlur={(ev) => this.validarTexto(ev, "validNombe")} onChange={(ev) => this.onChangeInput(ev)} />
+                    {validNombe === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                  <input className={`mr-2 mt-2 form-control ${validApell ? "border-success" : validApell === false? "border-danger": ""}`} type="text" placeholder="Surname" id="apell" onBlur={(ev) => this.validarTexto(ev, "validApell")} onChange={(ev) => this.onChangeInput(ev)} />
+                    {validApell === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                  <input className={`mr-2 mt-2 form-control ${validPass ? "border-success" : validPass === false? "border-danger": ""}`} type="password" placeholder="Password" id="password" onBlur={(ev) => this.validarPass(ev)} onChange={(ev) => this.onChangeInput(ev)} />
+                    {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
+                  <input className={`mr-2 mt-2 form-control ${validDNI ? "border-success" : validDNI === false? "border-danger": ""}`} type="text" placeholder="DNI" id="dni" onBlur={(ev) => this.validarDNI(ev)} onChange={(ev) => this.onChangeInput(ev)} />
+                    {validDNI === false && <p className="text-danger">Lo sentimos. Formato incorrecto.</p>}
+                  <button disabled={this.comprobarDisabled()} className="btn btn-primary float-right mt-2" type="submit" onClick={(ev) => this.onLogearse(ev)}>Registrarse</button>
+                </form>
               </div>
-          }
+            </div>
+            <div className="text-center mt-3">
+              <p>¿Ya tienes una cuenta?
+                <Link className="ml-2" to="/login">Inicia sesión</Link>
+              </p>    
+            </div>
+          </div>
+        }
       </>
     );
   }

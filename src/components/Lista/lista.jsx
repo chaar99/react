@@ -9,14 +9,12 @@ class Lista extends Component {
   render() {
     const { addProductCart, productos } = this.props;
     return (
-      
         <div className="col-10 mx-auto">
           <div className="row">
             {productos.map((producto, index) => (
               <Producto elemento={producto} addProductCart={addProductCart} key={index} />
             ))}
-          </div>
-        
+        </div>
       </div>
     );
   }

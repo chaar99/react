@@ -37,10 +37,10 @@ body,html{
   height: auto;
   z-index: 1000;
 }
-.footer2 {
-  height: auto;
-}
 
 main {
   flex: 1;
+}
+.pointer{
+  cursor: pointer;
 }

@@ -34,29 +34,25 @@ class DetalleP extends Component {
   render() {
     const { addProductCart, elemento, history } = this.props;
     return (       
-      <div className="row mt-4">
-        <div className="col-12 col-sm-2">
+      <div className="row mt-4 m-auto">
+        <div className="col-12 col-lg-2">
           <button type="button" onClick={(ev) => history.goBack()} className="btn btn-link">Volver</button>
         </div>
-        <div className="col-12 col-sm-5">
+        <div className="col-12 col-lg-5">
           <img className="img-fluid" src={"./img/"+ elemento.ruta} alt={elemento.nombre}/>
         </div>
-        <div className="col-12 col-sm-5">
-          <div className="row">
-            <div className="col-12 mt-5">
-              <h3 className="">{elemento.nombre}</h3>
-              <p className=" small">{elemento.precio}€ / Unidad</p>
-              <p className=" small">{elemento.descripcion}</p>
-              <div className="position-absolute">
-                <button className="btn btn-primary"
-                  onClick={(ev) => {
-                    ev.stopPropagation();
-                    ev.preventDefault();
-                    addProductCart(elemento.id_productos, elemento.nombre);
-                  }}
-                >Añadir al carrito</button>
-              </div>
-            </div>
+        <div className="col-12 col-lg-5 m-auto">
+          <h3 className="">{elemento.nombre}</h3>
+          <p className=" small">{elemento.precio}€ / Unidad</p>
+          <p className="">{elemento.descripcion}</p>
+          <div className="mb-2">
+            <button className="btn btn-dark"
+              onClick={(ev) => {
+                ev.stopPropagation();
+                ev.preventDefault();
+                addProductCart(elemento.id_productos, elemento.nombre);
+              }}
+            >Añadir al carrito</button>
           </div>
         </div>
       </div>

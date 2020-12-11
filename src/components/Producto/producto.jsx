@@ -22,19 +22,20 @@ class Producto extends Component {
     const { addProductCart, elemento } = this.props;
     return (            
       <div className="col-12 col-md-4 col-lg-3 p-3">
-        <div onClick={(ev) => this.navegarDetalle(ev)}>
-          <p className="text-center">{elemento.id_productos}</p>
-          <img className="mx-auto d-block" style={{ height: 175, width:200 }} src={"./img/"+ elemento.ruta} alt={elemento.nombre}/>
-          <p className="text-center">{elemento.nombre}</p>
-          <p className="text-center small">{elemento.precio}€ / Unidad</p>
+        <div className="bg-white shadow-lg  bg-white rounded pointer">
+          <div onClick={(ev) => this.navegarDetalle(ev)}>
+            <img className="mx-auto d-block" style={{ height: 175, width:200, maxWidth:"100%" }} src={"./img/"+ elemento.ruta} alt={elemento.nombre}/>
+            <h3 className="text-center">{elemento.nombre}</h3>
+            <p className="text-center small">{elemento.precio}€ / Unidad</p>
+          </div>
+          <button className="btn btn-dark w-100" style={{bottom: '0'}}
+            onClick={(ev) => {
+              ev.stopPropagation();
+              ev.preventDefault();
+              addProductCart(elemento.id_productos, elemento.nombre);
+            }}
+          >Añadir al carrito</button>
         </div>
-        <button className="btn btn-primary w-100" style={{bottom: '0'}}
-          onClick={(ev) => {
-            ev.stopPropagation();
-            ev.preventDefault();
-            addProductCart(elemento.id_productos, elemento.nombre);
-          }}
-        >Añadir al carrito</button>
       </div>  
     );
   }
