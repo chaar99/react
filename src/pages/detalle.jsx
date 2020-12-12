@@ -8,7 +8,7 @@ class Detalle extends Component {
   }
 
   render() {
-    const { location, addProductCart } = this.props;
+    const { location, addProductCart, onAddProducto } = this.props;
     if(!location.state) {
       this.props.history.push({
         pathname:'/'
@@ -17,7 +17,7 @@ class Detalle extends Component {
     }
     return (
       <div className="container2">
-        <DetalleP elemento={location.state.elemento} addProductCart={addProductCart} />
+        <DetalleP elemento={location.state.elemento} addProductCart={addProductCart} onAddProducto={onAddProducto}/>
       </div>
     );
   }

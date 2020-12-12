@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { compruebaText, stock, precio } from "../utils/validaciones";
 import { withRouter } from 'react-router-dom';
 import Load from '../components/Load/load';
+import { Link } from "react-router-dom";
 
 class Nuevo extends Component {
   constructor(props) {
@@ -11,10 +12,14 @@ class Nuevo extends Component {
       stock: null, validSt: null, 
       descripcion: null, validDesc: null,
       precio: null, validP: null,
-      ruta: null,
-      categoria: null, validCa: null,
-      error: null
+      ruta: null, validR: null,
+      error: null, loading: false, logeado: false
     };
+  }
+
+  comprobarDisabled() {
+    const { validNombe, validSt, validDesc, validP, validR } = this.state;
+    return !(validNombe && validSt && validDesc && validP && validR);
   }
 
   onChangeInput(ev) {
@@ -24,7 +29,14 @@ class Nuevo extends Component {
       [ev.target.id]:ev.target.value
     });
   }
-  
+  onChangeFile(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.setState({
+      [ev.target.id]:ev.target.value,
+      validR: true
+    });
+  }
   validarTexto(ev, valorState) {
     this.setState({
       [valorState]: compruebaText(ev, ev.target.value)
@@ -49,43 +61,40 @@ class Nuevo extends Component {
       pathname: '/'
     });
   }
-
+  
   onAlta(ev) {
     this.setState({
       loading: true
     });
     ev.stopPropagation();
     ev.preventDefault();
-    const { nombre, stock, descripcion, precio, ruta, categoria } = this.state;
+    const { nombre, stock, descripcion, precio, ruta } = this.state;
     const objeto = {
-      nombre: nombre, stock: stock, descripcion: descripcion, precio: precio, ruta: ruta, categoria: categoria
+      nombre: nombre, stock: stock, descripcion: descripcion, precio: precio, ruta: ruta
     }
     fetch("http://localhost/aplicacion/proyectoDaw/nuevoProducto.php",{
         method: 'POST', 
         body: JSON.stringify(objeto), 
       }
-    ).then(res => {
-      if (res.status === 200) {
-        alert("registrado");
-        this.setState({
-          loading: false,
-          error: null
-        })
+      ).then(res => {
+        if (res.status === 200) {
+          this.setState({
+            loading: false,
+            error: null
+          });
+        }
         this.navegarIndex();
-        return Promise.resolve(res);
-      }
-    })
-    .then(res => res.json())
-    .catch((err) => {
-      this.setState({
-        error: "Este producto ya ha sido registrado",
-        loading: false
+      })
+      .catch((err) => {
+        this.setState({
+          error: "Este correo ya corresponde con un usuario",
+          loading: false
+        });
       });
-    });
-  }
+    }
 
   render() {
-    const { loading, error, validNombe, validDesc, validSt, validP, validCa, ruta } = this.state;
+    const { loading, error, validNombe, validDesc, validSt, validP, ruta } = this.state;
     return (
       <div className="container2">
         {loading && <Load />}
@@ -103,20 +112,13 @@ class Nuevo extends Component {
                     {validSt === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                   <input className={`mr-2 mt-2 form-control ${validP ? "border-success" : validP === false? "border-danger": ""}`} type="number" placeholder="Precio" onBlur={(ev) => this.validarPrecio(ev)} onChange={(ev) => this.onChangeInput(ev)} id="precio" />
                     {validP === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
-                  <select className=" mr-2 mt-2 custom-select" name="categoria" id="categoria" onChange={(ev) => this.onChangeInput(ev)}>
-                    <option disabled="disabled" selected="selected">Selecciona uno</option>
-                    <option value="Harry_Potter">Harry Potter</option>
-                    <option value="Marvel">Marvel</option>
-                    <option value="Star_wars">Star wars</option>
-                    <option value="Dibujos">Dibujos</option>
-                  </select>
                   <div className="custom-file mr-2 mt-2">
-                    <input type="file" className="custom-file-input" id="ruta" lang="es" onChange={(ev) => this.onChangeInput(ev)}/>
+                    <input type="file" className="custom-file-input" id="ruta" lang="es" onChange={(ev) => this.onChangeFile(ev)}/>
                     <label className="custom-file-label" form="ruta">Seleccionar Archivo</label>
                     {ruta && <small>{ruta}</small>}
                   </div>
                   <div>
-                    <input className="btn btn-primary float-right mt-2" type="submit" value="Dar de alta" onClick={(ev) => this.onAlta(ev)} />
+                    <button className="btn btn-dark float-right mt-2" type="submit"  disabled={this.comprobarDisabled()} onClick={(ev) => this.onAlta(ev)}>Dar de alta</button>
                   </div>
                 </form>
               </div>

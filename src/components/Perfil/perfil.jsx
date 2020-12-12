@@ -1,9 +1,9 @@
 import { Component } from 'react';
+import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import {ReactComponent as User} from "../../assets/usuario-de-perfil.svg";
 import {ReactComponent as Close} from "../../assets/close.svg";
 
-// si existe la cookie que se vean los datos dento, sino que ponga un boton para iniciar sesión
 class Perfil extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +29,12 @@ class Perfil extends Component {
     document.body.style.overflow = "scroll";
   }
 
+  cerrarSesion(ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    localStorage.setItem("registrado", false);
+  }
+
   widthUserContent() {
     const { userOpen } = this.state;
     const maxWidth = window.screen.width > 600 ? 400 : window.screen.width;
@@ -45,9 +51,9 @@ class Perfil extends Component {
         <div className="cart-content" style={{width: this.widthUserContent()}}>
           <UserHeader closeUser={() => this.closeUser()} />
           <div className="h-100 w-auto">
-            {localStorage.getItem('registrado') != "false" && <RenderUser usuario={usuario}/>}
+            {localStorage.getItem('registrado') === "false" || localStorage.getItem('registrado') === null ?"": <RenderUser usuario={usuario}/>}
           </div>
-          <UserContentFooter usuario={usuario} />
+          <UserContentFooter usuario={usuario} cerrarSesion={(ev) => this.cerrarSesion(ev)} />
         </div>
       </div>  
     );
@@ -78,12 +84,10 @@ function RenderUser({ usuario }) {
   )
 }
 
-function UserContentFooter({ usuario }) {
+function UserContentFooter({ usuario , cerrarSesion}) {
   return(
     <div className="cart-content-footer">
-      <Button>Cierra sesion</Button><br/>
-      {/* esto no va aqui */}
-      {usuario.idR === "1"? <Button> Eliminar Producto</Button>: ""}
+       {localStorage.getItem('registrado') === "false" || localStorage.getItem('registrado') === null ?<Button><Link className="ml-2 text-white" to="/login">Inicia sesión</Link></Button>: <Button onClick={(ev) => cerrarSesion(ev)}>Cierra sesion</Button>}
     </div>
   )
 }

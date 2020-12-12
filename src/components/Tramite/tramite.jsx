@@ -1,12 +1,12 @@
 import { Component } from 'react';
+import { Link } from "react-router-dom";
 import {ReactComponent as Camion} from "../../assets/camion.svg";
 import {ReactComponent as Usuario} from "../../assets/usuario-de-perfil.svg";
 import {ReactComponent as Tarjeta} from "../../assets/tarjeta-de-credito.svg";
-
 import { compruebaText, compruebaDNI, telefono, cod_postal, provincias, compruebaCalle, titular, numTarjet, validarcvv, validarFech } from "../../utils/validaciones";
-import './tramite.css';
 import { RenderProduct } from "../cart/cart";
 import { productsDetail } from "../../utils/arrayFunciones";
+import './tramite.css';
 
 class Tramite extends Component {
     constructor(props) {
@@ -25,8 +25,16 @@ class Tramite extends Component {
           tit_tarjeta: null, validaTit: null,
           num_tarjeta: null, validaNum: null,
           date: null, validaDate: null,
-          cvv: null, validaCVV: null, loading: false, error: null
+          cvv: null, validaCVV: null, loading: false, error: null, logeado: false, cantidad:1
         };
+    }
+
+    comprobarDisabled() {
+      const { validNombe, validApe, validDni, validaTelf, validaTit,
+        validaCalle, validaDet, validaCiu, validaProv, validCodP, validaEnvio,
+        validaNum, validaDate, validaCVV
+      } = this.state;
+      return !(validNombe && validApe && validDni && validaTelf && validaCalle && validaDet && validaCiu && validaProv && validCodP && validaEnvio && validaTit && validaNum && validaDate && validaCVV);
     }
 
     onChangeInput(ev) {
@@ -42,7 +50,7 @@ class Tramite extends Component {
       ev.preventDefault();
       this.setState({
           envio : ev.target.value,
-          validaEnvio: null
+          validaEnvio: true
       });
     }
     validarTexto(ev, valorState) {
@@ -105,15 +113,23 @@ class Tramite extends Component {
       }) 
     }
 
+    navegarIndex() {
+      this.props.onAddProducto();
+      this.props.history.push({
+        pathname: '/'
+      });
+    }
+
     aceptar(ev, total) {
       this.setState({
         loading: true
       });
       ev.stopPropagation();
       ev.preventDefault();
-      const { nombre, apellido, telefono, calle, detC, ciudad, prov, codP } = this.state;
+      const id = localStorage.getItem("productos");
+      const { nombre, apellido, telefono, calle, detC, ciudad, prov, codP, cantidad } = this.state;
       const objeto = {
-        nombre: nombre, apellido: apellido, telefono: telefono, calle: calle, detC: detC, ciudad: ciudad, prov: prov, codP: codP, total: total
+        nombre: nombre, apellido: apellido, telefono: telefono, calle: calle, detC: detC, ciudad: ciudad, prov: prov, codP: codP, total: total, id:id, cantidad:cantidad
       }
       fetch("http://localhost/aplicacion/proyectoDaw/tramite.php",{
           method: 'POST', 
@@ -121,16 +137,14 @@ class Tramite extends Component {
         }
       ).then(res => {
         if (res.status === 200) {
-          alert("comprado");
           this.setState({
             loading: false,
             error: null
-          })
-          this.navegarIndex();
-          return Promise.resolve(res);
+          });
         }
+        localStorage.setItem("productos", null);
+        this.navegarIndex();
       })
-      .then(res => res.json())
       .catch((err) => {
         this.setState({
           error: "Revisa tus productos",
@@ -162,7 +176,7 @@ class Tramite extends Component {
                     {validaDet === false && <small className="text-danger">Lo sentimos. Formato incorrecto.</small>}
                   <input type="text" placeholder="Ciudad" id="ciudad" className={`mr-2 mt-2 form-control ${validaCiu ? "border-success" : validaCiu === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validarTexto(ev, "validaCiu")}/>
                     {validaCiu === false && <small className="text-danger">Lo sentimos. Formato incorrecto. introduce una ciudad válida</small>}
-                  <input type="text" placeholder="Provincia" id="provincia" className={`mr-2 mt-2 form-control ${validaProv ? "border-success" : validaProv === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validarProv(ev)}/>
+                  <input type="text" placeholder="Provincia" id="prov" className={`mr-2 mt-2 form-control ${validaProv ? "border-success" : validaProv === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validarProv(ev)}/>
                     {validaProv === false && <small className="text-danger">Lo sentimos. Formato incorrecto. Introduce una provincia válida</small>}
                   <input type="text" placeholder="Código postal" id="codP" className={`mr-2 mt-2 form-control ${validCodP ? "border-success" : validCodP === false? "border-danger": ""}`} onChange={(ev) => this.onChangeInput(ev)} onBlur={(ev) => this.validarCod(ev)}/>
                     {validCodP === false && <small className="text-danger">Lo sentimos. Formato incorrecto. Introduce un codigo postal válido</small>}
@@ -258,17 +272,31 @@ class Tramite extends Component {
             )}
           </div>
           <div className="text-right pr-3 pb-2">
-            <p>Precio por {productsCar.length} Funkos: {total} €</p>
+            <p>Precio por Funko(s): {total} €</p>
             <p>Precio por gasto de envío: {envio} €</p>
             <p>Total: {suma} €</p>
-            <button className="btn btn-primary" onClick={(ev, total) => this.aceptar(ev, suma)}>Aceptar</button>
+            <button className="btn btn-dark" disabled={this.comprobarDisabled()} onClick={(ev, total) => this.aceptar(ev, suma)}>Aceptar</button>
           </div>
         </div>
       )
     }
     render() {
       const { productos, productsCar } = this.props;
+      const { logeado } = this.state;
       const productosDetail = productsDetail(productos, productsCar);
+      if(logeado) {
+        return (
+          <div className="containe2">
+            <div className="row mx-auto">
+              <div className="col-12">
+                <h3 className="text-center">Producto comprado</h3>
+                <p className="text-center">Gracias por confiar en nosotros, tu pedido llegará muy pronto.</p>
+                <button className="btn btn-dark text-white"><Link className="ml-2" to="/">Ir a inicio</Link></button>
+              </div>
+            </div>
+          </div>
+        )
+      }
       return (
         <>
           <div className="tramite row mx-auto my-5">

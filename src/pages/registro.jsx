@@ -97,11 +97,11 @@ class Registro extends Component {
     const { loading, error, validCorreo, validNombe, validApell, validDNI, validPass, logeado } = this.state;
     if(logeado) {
       return (
-        <div className="section">
-          <div className="row">
+        <div className="container2">
+          <div className="row mx-auto">
             <div className="col-12">
               <h3 className="text-center">Registrado correctamente</h3>
-              <button><Link className="ml-2" to="/">Ir a inicio</Link></button>
+              <button className="btn btn-dark text-white"><Link className="ml-2" to="/">Ir a inicio</Link></button>
             </div>
           </div>
         </div>

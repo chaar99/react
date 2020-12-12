@@ -81,11 +81,11 @@ class Login extends Component {
     const { error, logeado, loading, validCorreo,validPass } = this.state;
     if(logeado) {
       return (
-        <div className="section">
-          <div className="row">
+        <div className="containe2">
+          <div className="row mx-auto">
             <div className="col-12">
               <h3 className="text-center">Registrado correctamente</h3>
-              <button><Link className="ml-2" to="/">Ir a inicio</Link></button>
+              <button className="btn btn-dark text-white"><Link className="ml-2" to="/">Ir a inicio</Link></button>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@ class Login extends Component {
                     <input className={`mr-2 mt-2 form-control ${validPass ? "border-success" : validPass === false? "border-danger": ""}`} type="password" placeholder="Password" id="password" onBlur={(ev) => this.validarPass(ev)} onChange={(ev) => this.onChangeInput(ev)} />
                       {validPass === false && <p className="text-danger">Lo sentimos. Formato incorrecto</p>}
                     <div>
-                      <button className="btn btn-dark float-right mt-2" type="submit"  onClick={(ev) => this.onLogearse(ev)}>Inicia sesión</button>
+                      <button className="btn btn-dark float-right mt-2" type="submit"  disabled={this.comprobarDisabled()} onClick={(ev) => this.onLogearse(ev)}>Inicia sesión</button>
                     </div>
                     {error && <p className="text-danger">{error}</p>}
                 </form>

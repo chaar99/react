@@ -7,6 +7,13 @@ class DetalleP extends Component {
     super(props);
   }
 
+  navegarIndex() {
+    this.props.onAddProducto();
+    this.props.history.push({
+      pathname: '/'
+    });
+  }
+  
   borrar(ev, id) {
     ev.stopPropagation();
     ev.preventDefault();
@@ -19,7 +26,7 @@ class DetalleP extends Component {
     }
     ).then(res => {
       if (res.status === 200) {
-        alert("borrado");
+        this.navegarIndex();
       }
     });
   }
@@ -54,6 +61,7 @@ class DetalleP extends Component {
                 addProductCart(elemento.id_productos, elemento.nombre);
               }}
             >Añadir al carrito</button>
+            {JSON.parse(localStorage.getItem('registrado')).idR === "1"? <button className="btn btn-danger ml-2" onClick={(ev, id) => this.borrar(ev, elemento.id_productos)}> Eliminar Producto</button>: ""}
           </div>
         </div>
       </div>

@@ -83,9 +83,10 @@ class App extends Component {
           <Route exact path="/tramite" component={() =>
             <Tramitar
               productos={productos}
+              onAddProducto={() => this.obtenerProductos()}
             />}
           />
-          <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} />} />
+          <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} onAddProducto={() => this.obtenerProductos()}/>} />
           <Route exact path="/editar" component={Editar} />
           <Footer />
       </Router>
