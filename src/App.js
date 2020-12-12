@@ -7,7 +7,6 @@ import Login from './pages/login';
 import Nuevo from './pages/nuevoProducto';
 import Detalle from './pages/detalle';
 import Tramitar from './pages/tramitar';
-import Editar from './pages/editar';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -87,7 +86,6 @@ class App extends Component {
             />}
           />
           <Route exact path="/detalle" component={() => <Detalle addProductCart={(id, nombre)=> this.addProductCart(id, nombre)} onAddProducto={() => this.obtenerProductos()}/>} />
-          <Route exact path="/editar" component={Editar} />
           <Footer />
       </Router>
     );

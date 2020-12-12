@@ -37,7 +37,7 @@ class Login extends Component {
       password : password,
       correo : correo
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/inicioSesion_usuario.php", {
+    fetch("http://localhost/aplicacion/proyectoDaw/pages/inicioSesion_usuario.php", {
       method: 'POST',
       body: JSON.stringify(objeto),
     })
@@ -53,6 +53,7 @@ class Login extends Component {
     })
     .then(res => {
         localStorage.setItem("registrado", JSON.stringify(res));
+        localStorage.setItem("productos", null);
     })
     .catch((err) => {
       this.setState({
@@ -81,11 +82,11 @@ class Login extends Component {
     const { error, logeado, loading, validCorreo,validPass } = this.state;
     if(logeado) {
       return (
-        <div className="containe2">
+        <div className="container2">
           <div className="row mx-auto">
             <div className="col-12">
               <h3 className="text-center">Registrado correctamente</h3>
-              <button className="btn btn-dark text-white"><Link className="ml-2" to="/">Ir a inicio</Link></button>
+              <button className="btn btn-dark"><Link className="ml-2 text-white" to="/">Ir a inicio</Link></button>
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ class DetalleP extends Component {
     const objeto = {
       id: id
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/borrarProducto.php",{
+    fetch("http://localhost/aplicacion/proyectoDaw/pages/borrarProducto.php",{
       method: 'POST',
       body: JSON.stringify(objeto),
     }
@@ -61,7 +61,7 @@ class DetalleP extends Component {
                 addProductCart(elemento.id_productos, elemento.nombre);
               }}
             >Añadir al carrito</button>
-            {JSON.parse(localStorage.getItem('registrado')).idR === "1"? <button className="btn btn-danger ml-2" onClick={(ev, id) => this.borrar(ev, elemento.id_productos)}> Eliminar Producto</button>: ""}
+            {localStorage.getItem("registrado") === null ? "": JSON.parse(localStorage.getItem('registrado')).idR === "1"? <button className="btn btn-danger ml-2" onClick={(ev, id) => this.borrar(ev, elemento.id_productos)}> Eliminar Producto</button>: ""}
           </div>
         </div>
       </div>

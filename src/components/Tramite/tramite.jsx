@@ -131,7 +131,7 @@ class Tramite extends Component {
       const objeto = {
         nombre: nombre, apellido: apellido, telefono: telefono, calle: calle, detC: detC, ciudad: ciudad, prov: prov, codP: codP, total: total, id:id, cantidad:cantidad
       }
-      fetch("http://localhost/aplicacion/proyectoDaw/tramite.php",{
+      fetch("http://localhost/aplicacion/proyectoDaw/pages/tramite.php",{
           method: 'POST', 
           body: JSON.stringify(objeto), 
         }

@@ -45,7 +45,7 @@ function MenuNav() {
       <Nav.Link href="/">Inicio</Nav.Link>
       <Nav.Link href="login">Inicia sesion</Nav.Link>
       {localStorage.getItem('registrado') === null?<Nav.Link href="registro">Registrate</Nav.Link>: ""}
-      {localStorage.getItem('registrado') === null || localStorage.getItem('registrado') == "false" ? "" : JSON.parse(localStorage.getItem('registrado')).idR === "1" ?<Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>: ""}
+      {localStorage.getItem('registrado') === null? "" : localStorage.getItem('registrado') === "false" ? "" : JSON.parse(localStorage.getItem('registrado')).idR === "1" ?<Nav.Link href="nuevoProducto">Nuevo producto</Nav.Link>: "" }
     </Nav>
   )
 }

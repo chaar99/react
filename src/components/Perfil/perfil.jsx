@@ -33,6 +33,7 @@ class Perfil extends Component {
     ev.stopPropagation();
     ev.preventDefault();
     localStorage.setItem("registrado", false);
+    localStorage.setItem("productos", null);
   }
 
   widthUserContent() {

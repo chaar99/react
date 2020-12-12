@@ -67,7 +67,7 @@ class Registro extends Component {
     const objeto = {
       nombre: nombre, password: password, correo: correo, apell: apell, dni: dni
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/registro_usuario.php",{
+    fetch("http://localhost/aplicacion/proyectoDaw/pages/registro_usuario.php",{
       method: 'POST',
       body: JSON.stringify(objeto),
     }
@@ -101,7 +101,7 @@ class Registro extends Component {
           <div className="row mx-auto">
             <div className="col-12">
               <h3 className="text-center">Registrado correctamente</h3>
-              <button className="btn btn-dark text-white"><Link className="ml-2" to="/">Ir a inicio</Link></button>
+              <button className="btn btn-dark"><Link className="ml-2 text-white" to="/">Ir a inicio</Link></button>
             </div>
           </div>
         </div>
