@@ -67,7 +67,7 @@ class Registro extends Component {
     const objeto = {
       nombre: nombre, password: password, correo: correo, apell: apell, dni: dni
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/pages/registro_usuario.php",{
+    fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/pages/registro_usuario.php",{
       method: 'POST',
       body: JSON.stringify(objeto),
     }
@@ -87,7 +87,12 @@ class Registro extends Component {
     .catch((err) => {
       this.setState({
         error: "Este correo ya corresponde con un usuario",
-        loading: false
+        loading: false,
+        validNombe: null,
+        validPass: null,
+        validCorreo: null,
+        validApell: null,
+        validDNI: null,
       });
       localStorage.setItem("registrado", false);
     });

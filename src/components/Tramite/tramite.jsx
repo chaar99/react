@@ -131,7 +131,7 @@ class Tramite extends Component {
       const objeto = {
         nombre: nombre, apellido: apellido, telefono: telefono, calle: calle, detC: detC, ciudad: ciudad, prov: prov, codP: codP, total: total, id:id, cantidad:cantidad
       }
-      fetch("http://localhost/aplicacion/proyectoDaw/pages/tramite.php",{
+      fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/pages/tramite.php",{
           method: 'POST', 
           body: JSON.stringify(objeto), 
         }
@@ -148,7 +148,12 @@ class Tramite extends Component {
       .catch((err) => {
         this.setState({
           error: "Revisa tus productos",
-          loading: false
+          loading: false,
+          validNombe: null, validApe: null, validDni: null,
+          validaTelf: null, validaTit: null, validaCalle: null, 
+          validaDet: null, validaCiu: null, validaProv: null, 
+          validCodP: null, validaEnvio: null, validaNum: null, 
+          validaDate: null, validaCVV: null
         });
       });
     }

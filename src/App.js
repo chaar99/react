@@ -28,7 +28,7 @@ class App extends Component {
     this.setState({
       loading: true
     });
-    fetch("http://localhost/aplicacion/proyectoDaw/index.php").then(res => res.json())
+    fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/index.php").then(res => res.json())
     .then(res => {
       this.setState({
         productos: res,

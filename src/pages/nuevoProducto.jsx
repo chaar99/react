@@ -72,7 +72,7 @@ class Nuevo extends Component {
     const objeto = {
       nombre: nombre, stock: stock, descripcion: descripcion, precio: precio, ruta: ruta
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/pages/nuevoProducto.php",{
+    fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/pages/nuevoProducto.php",{
         method: 'POST', 
         body: JSON.stringify(objeto), 
       }
@@ -88,7 +88,12 @@ class Nuevo extends Component {
       .catch((err) => {
         this.setState({
           error: "Este correo ya corresponde con un usuario",
-          loading: false
+          loading: false,
+          validNombe: null,
+          validSt: null,
+          validDesc: null,
+          validP: null,
+          validR: null,
         });
       });
     }

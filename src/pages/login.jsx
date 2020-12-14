@@ -37,7 +37,7 @@ class Login extends Component {
       password : password,
       correo : correo
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/pages/inicioSesion_usuario.php", {
+    fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/pages/inicioSesion_usuario.php", {
       method: 'POST',
       body: JSON.stringify(objeto),
     })

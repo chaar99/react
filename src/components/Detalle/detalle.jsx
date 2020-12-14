@@ -20,7 +20,7 @@ class DetalleP extends Component {
     const objeto = {
       id: id
     }
-    fetch("http://localhost/aplicacion/proyectoDaw/pages/borrarProducto.php",{
+    fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/pages/borrarProducto.php",{
       method: 'POST',
       body: JSON.stringify(objeto),
     }
