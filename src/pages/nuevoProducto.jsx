@@ -72,7 +72,7 @@ class Nuevo extends Component {
     const objeto = {
       nombre: nombre, stock: stock, descripcion: descripcion, precio: precio, ruta: ruta
     }
-    fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/pages/nuevoProducto.php",{
+    fetch("http://localhost/aplicacion/proyectoDaw/pages/nuevoProducto.php",{
         method: 'POST', 
         body: JSON.stringify(objeto), 
       }

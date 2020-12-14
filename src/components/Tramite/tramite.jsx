@@ -131,7 +131,7 @@ class Tramite extends Component {
       const objeto = {
         nombre: nombre, apellido: apellido, telefono: telefono, calle: calle, detC: detC, ciudad: ciudad, prov: prov, codP: codP, total: total, id:id, cantidad:cantidad
       }
-      fetch("https://95c2aa06c797.ngrok.io/aplicacion/proyectoDaw/pages/tramite.php",{
+      fetch("http://localhost/aplicacion/proyectoDaw/pages/tramite.php",{
           method: 'POST', 
           body: JSON.stringify(objeto), 
         }
